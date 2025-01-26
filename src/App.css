@@ -1,42 +1,89 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.home {
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.home::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home .content-1 {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  background-image: url("./images/home.jpg");
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.home .content-1 .left {
+  position: relative;
+  width: 90%;
+  padding: 1rem;
+  z-index: 1;
 }
 
-.card {
-  padding: 2em;
+.home .content-1 .left h1 {
+  font-size: 3rem;
+  color: #E0EAFC;
 }
 
-.read-the-docs {
-  color: #888;
+.home .content-1 .left p {
+  font-size: 1rem;
+  color: #E0EAFC;
+}
+
+.home .content-1 .left .blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.2rem);
+  z-index: -1;
+}
+
+.home .content-1 .left .btn {
+  margin-top: 1rem;
+}
+
+.home .content-1 .left .btn button {
+  padding: 0.5rem;
+  margin-right: 1rem;
+  color: #E0EAFC;
+  background: none;
+  border: 2px solid #E0EAFC;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.home .content-1 .left .btn button:hover {
+  padding: 0.5rem 1rem;
+  background-color: #6F3089;
+}
+
+.home .content-2 {
+  width: 100%;
+  padding: 1.6rem;
+  background-color: #6F3089;
+}
+
+.home .content-2 h1 {
+  font-size: 2rem;
+  color: #E0EAFC;
+  margin-bottom: 1.6rem;
+}
+
+
+.home .content-2 table td:nth-child(1) {
+  width: 40%;
+  vertical-align: top;
+  color: #E0EAFC;
+}
+
+.home .content-2 table td:nth-child(2) {
+  vertical-align: top;
+  color: #E0EAFC;
 }
