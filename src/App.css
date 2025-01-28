@@ -87,3 +87,102 @@
   vertical-align: top;
   color: #E0EAFC;
 }
+
+/* Components Register.jsx */
+.register .content {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  animation: start-rgs 3.5s ease-in-out;
+  overflow: hidden;
+}
+
+@keyframes start-rgs {
+  0% {
+    grid-template-columns: 100% 0%;
+  }
+
+  50% {
+    grid-template-columns: 10% 90%;
+  }
+}
+
+.register .content .left {
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: #6F3089;
+  overflow: hidden;
+}
+
+.register .content .left form {
+  justify-items: center;
+  align-content: center;
+  width: 80%;
+  height: 70%;
+  animation: start-form 8s ease-in-out;
+}
+
+@keyframes start-form {
+  0% {opacity: 0;}
+  100% {opacity: 90%;}
+}
+
+.register .content .left form h1 {
+  font-size: 2rem;
+  margin-bottom: 1.6rem;
+  color: #E0EAFC;
+}
+
+.register .content .left form input {
+  font-size: 1rem;
+  max-width: 80%;
+  padding: 0.6rem;
+  margin: 0 1rem;
+  margin-bottom: 1.6rem;
+  background: none;
+  color: #E0EAFC;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #E0EAFC;
+}
+
+.register .content .left form input::placeholder {
+  color: #E0EAFC;
+}
+
+.register .content .left form .icon {
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.register .content .left form .icon:hover {
+  scale: 1.2;
+}
+
+.register .content .left form button {
+  margin-top: 1.6rem;
+  padding: 0.6rem 1rem;
+  background: none;
+  color: #E0EAFC;
+  border: 2px solid #E0EAFC;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.register .content .left form button:hover {
+  padding: 0.6rem 1.6rem;
+  background-color: #E0EAFC;
+  color: #6F3089;
+}
+
+.register .content .right {
+  background-image: url("./images/lgn_rgs.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}

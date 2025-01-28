@@ -1,8 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShieldHalved } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from "react-router-dom"
+
+import STYLE from "../style/Style"
 
 function Register() {
+  const [form, setForm] = useState({})
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  let state = 0;
+  const showPass = check => {
+    const password = document.getElementById("password")
+    const confirm = document.getElementById("confirm")
+    if (check == true) {
+      state += 1;
+    }
+
+    switch (state) {
+      case 1: {
+        password.setAttribute("type", "text");
+        confirm.setAttribute("type", "text");
+        break;
+      }
+      case 2: {
+        password.setAttribute("type", "password");
+        confirm.setAttribute("type", "password");
+        state = 0
+        break;
+      }
+    }
+  }
+
+  const navigate = useNavigate()
   return (
-    <div>Register</div>
+    <div className='container register' style={STYLE.container}>
+      <div className="content" id='content-rgs'>
+        <div className="left">
+          <form action="" id='form'>
+            <h1 style={STYLE.font_family.th}>สมัครสมาชิก <FontAwesomeIcon icon={faShieldHalved} className='icon' onClick={() => showPass(true)} /> </h1>
+            <input type="text" name='username' style={STYLE.font_family.th} placeholder='ชื่อผู้ใช้' onChange={(e) => handleChange(e)} />
+            <input type="email" name='email' style={STYLE.font_family.th} placeholder='อีเมล์' /> <br />
+            <input type="password" name='password' id='password' style={STYLE.font_family.th} placeholder='รหัสผ่าน' />
+            <input type="password" name='confirm' id='confirm' style={STYLE.font_family.th} placeholder='ยืนยันรหัสอีกครั้ง' /> <br />
+            <button type="submit">สร้างบัญชี</button>
+          </form>
+        </div>
+        <div className="right">
+        </div>
+      </div>
+      <div className="not-support">
+        <h1 style={STYLE.font_family.en}>Not Support</h1>
+      </div>
+    </div>
   )
 }
 
