@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShieldHalved } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from "react-router-dom"
 
 import STYLE from "../style/Style"
 
@@ -15,40 +12,33 @@ function Register() {
     })
   }
 
-  let state = 0;
-  const showPass = check => {
+
+  const showPass = () => {
+    let checkbox = document.getElementById("check_password")
     const password = document.getElementById("password")
     const confirm = document.getElementById("confirm")
-    if (check == true) {
-      state += 1;
-    }
-
-    switch (state) {
-      case 1: {
-        password.setAttribute("type", "text");
-        confirm.setAttribute("type", "text");
-        break;
-      }
-      case 2: {
-        password.setAttribute("type", "password");
-        confirm.setAttribute("type", "password");
-        state = 0
-        break;
-      }
+    if (checkbox.checked == true) {
+      password.setAttribute("type", "text");
+      confirm.setAttribute("type", "text");
+    } else {
+      password.setAttribute("type", "password");
+      confirm.setAttribute("type", "password");
     }
   }
 
-  const navigate = useNavigate()
   return (
     <div className='container register' style={STYLE.container}>
       <div className="content" id='content-rgs'>
         <div className="left">
           <form action="" id='form'>
-            <h1 style={STYLE.font_family.th}>สมัครสมาชิก <FontAwesomeIcon icon={faShieldHalved} className='icon' onClick={() => showPass(true)} /> </h1>
+            <h1 style={STYLE.font_family.th}>สมัครสมาชิก</h1>
             <input type="text" name='username' style={STYLE.font_family.th} placeholder='ชื่อผู้ใช้' onChange={(e) => handleChange(e)} />
             <input type="email" name='email' style={STYLE.font_family.th} placeholder='อีเมล์' /> <br />
             <input type="password" name='password' id='password' style={STYLE.font_family.th} placeholder='รหัสผ่าน' />
             <input type="password" name='confirm' id='confirm' style={STYLE.font_family.th} placeholder='ยืนยันรหัสอีกครั้ง' /> <br />
+            <div className="box-check">
+              <input type="checkbox" name="check_password" id="check_password" onClick={showPass} />
+            </div>
             <button type="submit">สร้างบัญชี</button>
           </form>
         </div>

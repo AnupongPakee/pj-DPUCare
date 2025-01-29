@@ -61,13 +61,19 @@
 
 .home .content-1 .left .btn button:hover {
   padding: 0.5rem 1rem;
-  background-color: #6F3089;
+  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg-ift 4s infinite ease;
 }
 
 .home .content-2 {
   width: 100%;
   padding: 1.6rem;
-  background-color: #6F3089;
+  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg-ift 10s infinite ease;
 }
 
 .home .content-2 h1 {
@@ -75,7 +81,6 @@
   color: #E0EAFC;
   margin-bottom: 1.6rem;
 }
-
 
 .home .content-2 table td:nth-child(1) {
   width: 40%;
@@ -94,18 +99,7 @@
   display: grid;
   width: 100%;
   height: 100%;
-  animation: start-rgs 3.5s ease-in-out;
   overflow: hidden;
-}
-
-@keyframes start-rgs {
-  0% {
-    grid-template-columns: 100% 0%;
-  }
-
-  50% {
-    grid-template-columns: 10% 90%;
-  }
 }
 
 .register .content .left {
@@ -114,8 +108,11 @@
   text-align: center;
   width: 100%;
   height: 100%;
-  background-color: #6F3089;
+  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background-attachment: fixed;
+  background-size: 500%;
   overflow: hidden;
+  animation: bg 10s ease-in-out;
 }
 
 .register .content .left form {
@@ -123,7 +120,7 @@
   align-content: center;
   width: 80%;
   height: 70%;
-  animation: start-form 8s ease-in-out;
+  animation: start-form 4s ease-in-out;
 }
 
 @keyframes start-form {
@@ -154,14 +151,18 @@
   color: #E0EAFC;
 }
 
-.register .content .left form .icon {
-  font-size: 1.6rem;
-  cursor: pointer;
-  transition: all 0.4s ease-in-out;
+.register .content .left .box-check {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
 }
 
-.register .content .left form .icon:hover {
-  scale: 1.2;
+.register .content .left .box-check input[type="checkbox"] {
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+  accent-color: #ba59e4;
 }
 
 .register .content .left form button {
@@ -177,8 +178,10 @@
 
 .register .content .left form button:hover {
   padding: 0.6rem 1.6rem;
-  background-color: #E0EAFC;
-  color: #6F3089;
+  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg-ift 4s infinite ease;
 }
 
 .register .content .right {

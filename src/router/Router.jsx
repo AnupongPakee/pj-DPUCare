@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import APP from "../App"
 import REGISTER from "../components/Register"
 import LOGIN from "../components/Login"
-import SETTING from "../components/Setting"
 import CHAT from "../components/Chat"
 import ADMIN from "../admin/Admin"
 import TEST from "../test/Test"
@@ -20,10 +19,6 @@ const router = createBrowserRouter([
     {
         path: "/pj-DPUCare/login",
         element: <LOGIN/>
-    },
-    {
-        path: "/pj-DPUCare/setting",
-        element: <SETTING/>
     },
     {
         path: "/pj-DPUCare/chat",
