@@ -89,6 +89,10 @@ select:-webkit-autofill:focus {
     .register .content {
         grid-template-columns: 100% 0%;
     }
+
+    .login .content {
+        grid-template-columns: 0% 100%;
+    }
 }
 
 /* 414x896 (max) */
@@ -136,6 +140,10 @@ select:-webkit-autofill:focus {
 
     .register .content {
         grid-template-columns: 60% 40%;
+    }
+
+    .login .content {
+        grid-template-columns: 40% 60%;
     }
 }
 
