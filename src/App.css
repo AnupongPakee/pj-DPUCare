@@ -1,13 +1,13 @@
-.home {
+.index {
   overflow: scroll;
   overflow-x: hidden;
 }
 
-.home::-webkit-scrollbar {
+.index::-webkit-scrollbar {
   display: none;
 }
 
-.home .content-1 {
+.index .content-1 {
   display: grid;
   align-items: center;
   justify-items: center;
@@ -17,24 +17,24 @@
   background-attachment: fixed;
 }
 
-.home .content-1 .left {
+.index .content-1 .left {
   position: relative;
   width: 90%;
   padding: 1rem;
   z-index: 1;
 }
 
-.home .content-1 .left h1 {
+.index .content-1 .left h1 {
   font-size: 3rem;
   color: #E0EAFC;
 }
 
-.home .content-1 .left p {
+.index .content-1 .left p {
   font-size: 1rem;
   color: #E0EAFC;
 }
 
-.home .content-1 .left .blur {
+.index .content-1 .left .blur {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,11 +44,11 @@
   z-index: -1;
 }
 
-.home .content-1 .left .btn {
+.index .content-1 .left .btn {
   margin-top: 1rem;
 }
 
-.home .content-1 .left .btn button {
+.index .content-1 .left .btn button {
   padding: 0.5rem;
   margin-right: 1rem;
   color: #E0EAFC;
@@ -59,7 +59,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-.home .content-1 .left .btn button:hover {
+.index .content-1 .left .btn button:hover {
   padding: 0.5rem 1rem;
   background: linear-gradient(45deg, #9733EE, #DA22FF);
   background-attachment: fixed;
@@ -67,7 +67,7 @@
   animation: bg-ift 4s infinite ease;
 }
 
-.home .content-2 {
+.index .content-2 {
   width: 100%;
   padding: 1.6rem;
   background: linear-gradient(45deg, #9733EE, #DA22FF);
@@ -76,19 +76,19 @@
   animation: bg-ift 10s infinite ease;
 }
 
-.home .content-2 h1 {
+.index .content-2 h1 {
   font-size: 2rem;
   color: #E0EAFC;
   margin-bottom: 1.6rem;
 }
 
-.home .content-2 table td:nth-child(1) {
+.index .content-2 table td:nth-child(1) {
   width: 40%;
   vertical-align: top;
   color: #E0EAFC;
 }
 
-.home .content-2 table td:nth-child(2) {
+.index .content-2 table td:nth-child(2) {
   vertical-align: top;
   color: #E0EAFC;
 }
@@ -281,3 +281,53 @@
   0% {opacity: 0;}
   100% {opacity: 90%;}
 }
+
+/* Component Home.jsx */
+.home {
+  justify-items: center;
+  align-content: center;
+  padding: 1rem;
+  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg-ift 4s infinite ease;
+}
+
+.home .content {
+  display: grid;
+  width: 90%;
+  gap: 1rem;
+}
+
+.home .content > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 30px;
+}
+
+.home .content .date-time {
+  grid-column: 1 / span 2;
+}
+
+.home .content .chat {
+  grid-column: 3;
+  grid-row: 1 / span 4;
+}
+
+.home .content .logo {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+}
+
+.home .content .CoT {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 3;
+}
+
+  /* .home .content .setting {
+
+  }
+
+  .home .content .exit {
+
+  } */

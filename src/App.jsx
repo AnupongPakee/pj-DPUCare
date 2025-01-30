@@ -6,7 +6,7 @@ import STYLE from "./style/Style"
 function App() {
   const navigate = useNavigate()
   return (
-    <div className='container home' style={STYLE.container}>
+    <div className='container index' style={STYLE.container}>
       <div className="content-1">
         <div className="left">
           <h1 style={STYLE.font_family.th}>แชทบอทให้คำปรึกษา</h1>
