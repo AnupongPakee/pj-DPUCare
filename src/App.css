@@ -67,32 +67,6 @@
   animation: bg-ift 4s infinite ease;
 }
 
-.index .content-2 {
-  width: 100%;
-  padding: 1.6rem;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
-  background-attachment: fixed;
-  background-size: 500%;
-  animation: bg-ift 10s infinite ease;
-}
-
-.index .content-2 h1 {
-  font-size: 2rem;
-  color: #E0EAFC;
-  margin-bottom: 1.6rem;
-}
-
-.index .content-2 table td:nth-child(1) {
-  width: 40%;
-  vertical-align: top;
-  color: #E0EAFC;
-}
-
-.index .content-2 table td:nth-child(2) {
-  vertical-align: top;
-  color: #E0EAFC;
-}
-
 /* Components Register.jsx */
 .register .content {
   position: relative;
@@ -295,39 +269,41 @@
 
 .home .content {
   display: grid;
+  align-content: center;
+  /* grid-template-rows: 60% 60% 30% 30%; */
+  gap: 1.6rem;
   width: 90%;
-  gap: 1rem;
-}
-
-.home .content > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  font-size: 30px;
 }
 
 .home .content .date-time {
   grid-column: 1 / span 2;
 }
 
+/* .home .content .date-time { */
+/* } */
+
 .home .content .chat {
   grid-column: 3;
   grid-row: 1 / span 4;
+  background-color: aqua;
 }
 
 .home .content .logo {
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
+  background-color: aliceblue;
 }
 
 .home .content .CoT {
   grid-column: 2 / span 1;
   grid-row: 2 / span 3;
+  background-color: darkblue;
 }
 
-  /* .home .content .setting {
+.home .content .setting {
+  background-color: burlywood;
+}
 
-  }
-
-  .home .content .exit {
-
-  } */
+.home .content .exit {
+  background-color: fuchsia;
+}
