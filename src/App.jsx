@@ -1,23 +1,26 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from 'react'
 
 import STYLE from "./style/Style"
 
 function App() {
-  const navigate = useNavigate()
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    setInterval(() => setTime(new Date()), 1000)
+  }, [])
   return (
-    <div className='container index' style={STYLE.container}>
-      <div className="content-1">
-        <div className="left">
-          <h1 style={STYLE.font_family.th}>แชทบอทให้คำปรึกษา</h1>
-          <p style={STYLE.font_family.th}> DPU Care เป็นบริการแชทบอทที่ให้คำปรึกษาด้านความเครียด</p>
-          <div className="btn">
-            <button style={STYLE.font_family.th} onClick={() => navigate("/pj-DPUCare/login")}>เข้าสู่ระบบ</button>
-            <button style={STYLE.font_family.th} onClick={() => navigate("/pj-DPUCare/register")}>สร้างบัญชี</button>
-          </div>
+    <div className='container home' style={STYLE.container}>
+      <div className="content">
+        <div className="date-time">
+          <h1>{time.toLocaleTimeString()}</h1>
+          <h3>{time.toDateString()}</h3>
           <div className="blur"></div>
         </div>
-        <div className="right"></div>
+        <div className="chat">chat</div>
+        <div className="logo">DPU Care</div>
+        <div className="setting">setting</div>
+        <div className="CoT">CoT</div>
+        <div className="exit">exit</div>
       </div>
       <div className="not-support">
         <h1 style={STYLE.font_family.en}>Not Support</h1>

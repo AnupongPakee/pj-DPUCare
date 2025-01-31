@@ -1,40 +1,56 @@
-.index {
-  overflow: scroll;
-  overflow-x: hidden;
-}
-
-.index::-webkit-scrollbar {
-  display: none;
-}
-
-.index .content-1 {
-  display: grid;
-  align-items: center;
+/* Component Home.jsx */
+.home {
   justify-items: center;
-  width: 100%;
-  background-image: url("./images/home.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-.index .content-1 .left {
-  position: relative;
-  width: 90%;
+  align-content: center;
   padding: 1rem;
-  z-index: 1;
+  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg-ift 4s infinite ease;
 }
 
-.index .content-1 .left h1 {
-  font-size: 3rem;
-  color: #E0EAFC;
+.home .content {
+  display: grid;
+  align-content: center;
+  /* grid-template-rows: 60% 60% 30% 30%; */
+  gap: 1.6rem;
+  width: 90%;
 }
 
-.index .content-1 .left p {
-  font-size: 1rem;
-  color: #E0EAFC;
+.home .content .date-time {
+  grid-column: 1 / span 2;
 }
 
-.index .content-1 .left .blur {
+/* .home .content .date-time { */
+/* } */
+
+.home .content .chat {
+  grid-column: 3;
+  grid-row: 1 / span 4;
+  background-color: aqua;
+}
+
+.home .content .logo {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  background-color: aliceblue;
+}
+
+.home .content .CoT {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 3;
+  background-color: darkblue;
+}
+
+.home .content .setting {
+  background-color: burlywood;
+}
+
+.home .content .exit {
+  background-color: fuchsia;
+}
+
+/* .index .content-1 .left .blur {
   position: absolute;
   top: 0;
   left: 0;
@@ -42,30 +58,7 @@
   height: 100%;
   backdrop-filter: blur(0.2rem);
   z-index: -1;
-}
-
-.index .content-1 .left .btn {
-  margin-top: 1rem;
-}
-
-.index .content-1 .left .btn button {
-  padding: 0.5rem;
-  margin-right: 1rem;
-  color: #E0EAFC;
-  background: none;
-  border: 2px solid #E0EAFC;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: all 0.4s ease-in-out;
-}
-
-.index .content-1 .left .btn button:hover {
-  padding: 0.5rem 1rem;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
-  background-attachment: fixed;
-  background-size: 500%;
-  animation: bg-ift 4s infinite ease;
-}
+} */
 
 /* Components Register.jsx */
 .register .content {
@@ -254,56 +247,4 @@
 @keyframes start-form {
   0% {opacity: 0;}
   100% {opacity: 90%;}
-}
-
-/* Component Home.jsx */
-.home {
-  justify-items: center;
-  align-content: center;
-  padding: 1rem;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
-  background-attachment: fixed;
-  background-size: 500%;
-  animation: bg-ift 4s infinite ease;
-}
-
-.home .content {
-  display: grid;
-  align-content: center;
-  /* grid-template-rows: 60% 60% 30% 30%; */
-  gap: 1.6rem;
-  width: 90%;
-}
-
-.home .content .date-time {
-  grid-column: 1 / span 2;
-}
-
-/* .home .content .date-time { */
-/* } */
-
-.home .content .chat {
-  grid-column: 3;
-  grid-row: 1 / span 4;
-  background-color: aqua;
-}
-
-.home .content .logo {
-  grid-column: 1 / span 1;
-  grid-row: 2 / span 1;
-  background-color: aliceblue;
-}
-
-.home .content .CoT {
-  grid-column: 2 / span 1;
-  grid-row: 2 / span 3;
-  background-color: darkblue;
-}
-
-.home .content .setting {
-  background-color: burlywood;
-}
-
-.home .content .exit {
-  background-color: fuchsia;
 }

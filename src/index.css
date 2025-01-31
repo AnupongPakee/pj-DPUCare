@@ -75,11 +75,9 @@ select:-webkit-autofill:focus {
     .not-support {
         display: none;
     }
-
-    .index .content-1 {
-        height: 100%;
-        grid-template-columns: 100%;
-        grid-template-rows: 100%;
+    
+    .home .content {
+        grid-template-rows: 60% 40% 20% 20%;
     }
 
     .register .content {
@@ -89,20 +87,12 @@ select:-webkit-autofill:focus {
     .login .content {
         grid-template-columns: 0% 100%;
     }
-
-    .home .content {
-        grid-template-rows: 60% 40% 20% 20%;
-    }
 }
 
 /* 414x896 (max) */
 @media screen and (min-width: 414px) {
     * {
         font-size: 14px;
-    }
-
-    .index .content-1 {
-        height: 60%;
     }
 }
 
@@ -121,9 +111,8 @@ select:-webkit-autofill:focus {
         font-size: 18px;
     }
 
-    .index .content-1 {
-        height: 100%;
-        grid-template-columns: 60% 40%;
+    .home .content {
+        grid-template-rows: 70% 60% 30% 30%;
     }
 
     .register .content {
@@ -133,10 +122,6 @@ select:-webkit-autofill:focus {
     .login .content {
         grid-template-columns: 40% 60%;
     }
-
-    .home .content {
-        grid-template-rows: 70% 60% 30% 30%;
-    }
 }
 
 /* Desktop */
@@ -145,10 +130,5 @@ select:-webkit-autofill:focus {
 @media screen and (min-width: 1920px) {
     * {
         font-size: 28px;
-    }
-
-    .index .content-1 {
-        height: 100%;
-        grid-template-columns: 60% 40%;
     }
 }
