@@ -84,6 +84,16 @@ select:-webkit-autofill:focus {
         height: 30%;
     }
 
+    .home .content .chat {
+        justify-items: center;
+        align-content: center;
+    }
+
+    .home .content .chat .show-message,
+    .home .content .chat form {
+        display: none;
+    }
+
     .home .content .date-time h1 {
         font-size: 1.4rem;
     }
@@ -106,11 +116,6 @@ select:-webkit-autofill:focus {
 
     .home .content .exit {
         font-size: 0.8rem;
-    }
-
-    .home .content .chat .show-message,
-    .home .content .chat form {
-        display: none;
     }
 
     .register .content {
@@ -152,6 +157,23 @@ select:-webkit-autofill:focus {
         height: 50%;
     }
 
+    .home .content .chat {
+        align-items: normal;
+        justify-items: normal;
+    }
+    
+    .home .content .chat h1 {
+        display: none;
+    }
+
+    .home .content .chat .show-message {
+        display: inline-block;
+    }
+
+    .home .content .chat form {
+        display: flex;
+    }
+
     .home .content .date-time h1 {
         font-size: 1.6rem;
     }
@@ -170,18 +192,6 @@ select:-webkit-autofill:focus {
 
     .home .content .exit {
         font-size: 1rem;
-    }
-
-    .home .content .chat h1 {
-        display: none;
-    }
-
-    .home .content .chat .show-message {
-        display: inline-block;
-    }
-
-    .home .content .chat form {
-        display: flex;
     }
 
     .register .content {
