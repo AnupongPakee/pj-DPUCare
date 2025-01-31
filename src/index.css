@@ -75,9 +75,42 @@ select:-webkit-autofill:focus {
     .not-support {
         display: none;
     }
-    
+
     .home .content {
+        gap: 1rem;
+        grid-template-columns: auto auto 40%;
         grid-template-rows: 60% 40% 20% 20%;
+        width: 100%;
+        height: 30%;
+    }
+
+    .home .content .date-time h1 {
+        font-size: 1.4rem;
+    }
+
+    .home .content .date-time h3 {
+        font-size: 0.8rem;
+    }
+
+    .home .content .logo h1 {
+        font-size: 1rem;
+    }
+
+    .home .content .CoT h1 {
+        transform: rotate(90deg);
+    }
+
+    .home .content .setting {
+        font-size: 0.8rem;
+    }
+
+    .home .content .exit {
+        font-size: 0.8rem;
+    }
+
+    .home .content .chat .show-message,
+    .home .content .chat form {
+        display: none;
     }
 
     .register .content {
@@ -112,7 +145,43 @@ select:-webkit-autofill:focus {
     }
 
     .home .content {
-        grid-template-rows: 70% 60% 30% 30%;
+        gap: 1.6rem;
+        grid-template-columns: auto auto 50%;
+        grid-template-rows: 50% 40% 30% 30%;
+        width: 90%;
+        height: 50%;
+    }
+
+    .home .content .date-time h1 {
+        font-size: 1.6rem;
+    }
+
+    .home .content .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .home .content .CoT h1 {
+        transform: rotate(0);
+    }
+
+    .home .content .setting {
+        font-size: 1rem;
+    }
+
+    .home .content .exit {
+        font-size: 1rem;
+    }
+
+    .home .content .chat h1 {
+        display: none;
+    }
+
+    .home .content .chat .show-message {
+        display: inline-block;
+    }
+
+    .home .content .chat form {
+        display: flex;
     }
 
     .register .content {
