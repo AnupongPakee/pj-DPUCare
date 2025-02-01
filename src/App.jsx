@@ -20,9 +20,9 @@ function App() {
           <h3 style={STYLE.font_family.en}>{time.toDateString()}</h3>
         </div>
         <div className="chat">
-          <h1 style={STYLE.font_family.th}>แชทบอท</h1>
+          <h1 style={STYLE.font_family.th} onClick={() => navigate("/pj-DPUCare/chat")}>แชทบอท</h1>
           <div className="show-message">
-            <FontAwesomeIcon icon={faExpand} className='icon-full' />
+            <FontAwesomeIcon icon={faExpand} className='icon-full' onClick={() => navigate("/pj-DPUCare/chat")} />
             <div className='ai'>
               <p className='ai-message' style={STYLE.font_family.th}>สวัสดีชาวโลกผู้โง่เขา</p>
             </div>

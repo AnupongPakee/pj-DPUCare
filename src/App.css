@@ -3,10 +3,10 @@
   justify-items: center;
   align-content: center;
   padding: 1rem;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
   background-attachment: fixed;
   background-size: 500%;
-  animation: bg-ift 10s infinite ease;
+  animation: bg-ift 20s infinite ease;
 }
 
 .home .content {
