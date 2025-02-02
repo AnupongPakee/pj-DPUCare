@@ -3,10 +3,11 @@
   justify-items: center;
   align-content: center;
   padding: 1rem;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background: radial-gradient(circle, #ad5389, #3c1053);
   background-attachment: fixed;
-  background-size: 500%;
-  animation: bg-ift 20s infinite ease;
+  background-size: 100%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
 }
 
 .home .content {
@@ -19,7 +20,7 @@
   align-content: center;
   grid-column: 1 / span 2;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -40,14 +41,17 @@
   grid-column: 3;
   grid-row: 1 / span 4;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
   transition: all 0.6s ease-in-out;
 }
 
 .home .content .chat:hover {
-  background-color: rgba(255, 0, 221, 0.5); 
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
 }
 
 .home .content .chat h1 {
@@ -145,7 +149,7 @@
   padding: 1rem;
   text-align: center;
   align-content: center;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -161,7 +165,7 @@
   text-align: center;
   align-content: center;
   justify-items: center;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
   cursor: not-allowed;
@@ -169,7 +173,11 @@
 }
 
 .home .content .CoT:hover {
-  background-color: rgba(255, 0, 221, 0.5);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
 }
 
 .home .content .CoT h1 {
@@ -183,7 +191,7 @@
   align-content: center;
   text-transform: uppercase;
   color: #E0EAFC;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
   cursor: pointer;
@@ -191,7 +199,11 @@
 }
 
 .home .content .setting:hover {
-  background-color: rgba(255, 0, 221, 0.5);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
 }
 
 .home .content .exit {
@@ -200,7 +212,7 @@
   align-content: center;
   text-transform: uppercase;
   color: #E0EAFC;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
   cursor: pointer;
@@ -208,7 +220,11 @@
 }
 
 .home .content .exit:hover {
-  background-color: rgba(255, 0, 221, 0.5);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
 }
 
 /* Components Register.jsx */
@@ -226,9 +242,9 @@
   text-align: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
   background-attachment: fixed;
-  background-size: 500%;
+  background-size: 100%;
   overflow: hidden;
   animation: bg 10s ease-in-out;
 }
@@ -291,7 +307,7 @@
 
 .register .content .left form button:hover {
   padding: 0.6rem 1.6rem;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
   background-attachment: fixed;
   background-size: 500%;
   animation: bg-ift 4s infinite ease;
@@ -324,9 +340,9 @@
   text-align: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
   background-attachment: fixed;
-  background-size: 500%;
+  background-size: 100%;
   overflow: hidden;
   animation: bg 10s ease-in-out;
 }
@@ -389,10 +405,10 @@
 
 .login .content .right form button:hover {
   padding: 0.6rem 1.6rem;
-  background: linear-gradient(45deg, #9733EE, #DA22FF);
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
   background-attachment: fixed;
   background-size: 500%;
-  animation: bg-ift 4s infinite ease;
+  animation: bg 4s infinite ease;
 }
 
 @keyframes start-form {
@@ -403,4 +419,335 @@
   100% {
     opacity: 90%;
   }
+}
+
+/* Component Chat.jsx */
+.chat .content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 100%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out; 
+}
+
+.chat .silde-left {
+  position: relative;
+  width: 30%;
+  height: 100%;
+  padding: 1rem;
+  background-color: rgba(60, 16, 83, 0.4);
+}
+
+.chat .silde-left button {
+  padding: 0.6rem;
+  background: none;
+  color: #E0EAFC;
+  border: 2px solid #E0EAFC;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .silde-left button:hover {
+  border-color: #ad5389;
+  box-shadow: inset 0 0 1rem #ad5389;
+}
+
+.chat .silde-left .line {
+  width: 100%;
+  height: 0.2rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg 10s infinite ease;
+}
+
+.chat .silde-left .history {
+  width: 100%;
+  height: 70%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.chat .silde-left .history::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.chat .silde-left .history::-webkit-scrollbar-track {
+  background-color: rgba(60, 16, 83, 0.4);
+}
+
+.chat .silde-left .history::-webkit-scrollbar-thumb {
+  background-color: rgba(173, 83, 137, 0.5);
+}
+
+.chat .silde-left .history .name-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 2px solid #E0EAFC;
+  border-radius: 1rem;
+  color: #E0EAFC;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .silde-left .history .name-icon:hover {
+  border-color: #ad5389;
+  box-shadow: inset 0 0 1rem #ad5389;
+}
+
+.chat .silde-left .history .name-icon .icon-delete {
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .silde-left .history .name-icon .icon-delete:hover {
+  scale: 1.2;
+}
+
+.chat .silde-left .mini-menu {
+  text-align: right;
+  width: 100%;
+  color: #E0EAFC;
+}
+
+.chat .silde-left .mini-menu .icon-mini {
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .silde-left .mini-menu .icon-mini:hover {
+  scale: 1.2;
+  color: #ad5389;
+}
+
+.chat .menu-moblie {
+  width: 10%;
+  height: 100%;
+  padding: 0.6rem;
+  text-align: center;
+  background-color: rgba(173, 83, 137, 0.4);
+}
+
+.chat .menu-moblie .icon-moblie {
+  color: #E0EAFC;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .menu-moblie .icon-moblie:hover {
+  scale: 1.2;
+}
+
+.chat .silde-right {
+  position: relative;
+  min-width: 70%;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  padding: 1rem;
+  background-color: rgba(60, 16, 83, 0.25);
+}
+
+.chat .silde-right .resizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.2rem;
+  height: 100%;
+  background-color: #ad5389;
+  cursor: alias;
+}
+
+.chat .silde-right .show-message {
+  height: 80%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.chat .silde-right .show-message::-webkit-scrollbar {
+  display: none;
+}
+
+.chat .silde-right .show-message .ai-message {
+  display: inline-block;
+  max-width: 50%;
+  padding: 0.8rem;
+  color: #E0EAFC;
+  border: 2px solid #E0EAFC;
+  border-radius: 0 1rem 1rem 1rem;
+}
+
+.chat .silde-right .show-message .h-message {
+  justify-self: flex-end;
+  max-width: 50%;
+}
+
+.chat .silde-right .show-message .human-message {
+  display: inline-block;
+  padding: 0.8rem;
+  margin: 1rem 0;
+  background-color: rgba(60, 16, 83, 1);
+  color: #E0EAFC;
+  border: 2px solid #E0EAFC;
+  border-radius: 1rem 0 1rem 1rem;
+}
+
+.chat .silde-right .input {
+  display: flex;
+  justify-content: space-between;
+  height: 10%;
+}
+
+.chat .silde-right .input form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #E0EAFC;
+  border-radius: 2rem ;
+}
+
+.chat .silde-right .input form input {
+  width: 100%;
+  padding-left: 1rem;
+  background: none;
+  color: #E0EAFC;
+  border: none;
+  outline: none;
+}
+
+.chat .silde-right .input form input::placeholder {
+  color: #E0EAFC;
+}
+
+.chat .silde-right .input .icon-send {
+  padding: 0.4rem;
+  margin: 0 1rem;
+  color: #E0EAFC;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .silde-right .input .icon-send:hover {
+  scale: 1.2;
+  color: #ad5389;
+}
+
+.chat .silde-right .input button {
+  margin-left: 1rem;
+  padding: 0.6rem;
+  background: none;
+  color: #E0EAFC;
+  border: 2px solid #E0EAFC;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .silde-right .input button:hover {
+  border-color: #ad5389;
+  box-shadow: inset 0 0 1rem #ad5389;
+}
+
+.chat .silde-right .warning {
+  margin-top: 0.4rem;
+  text-align: center;
+  color: #E0EAFC;
+}
+
+.chat .silde-right .warning p {
+  font-size: 0.7rem;
+}
+
+.chat .option-moblie {
+  position: absolute;
+  top: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: radial-gradient(circle, #ad5389, #3c1053);
+}
+
+.chat .option-moblie .nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat .option-moblie .nav-menu h1 {
+  color: #E0EAFC;
+}
+
+.chat .option-moblie .nav-menu .icon-exit {
+  color: #E0EAFC;
+  cursor: pointer;
+  transition: 0.6s ease-in-out;
+}
+
+.chat .option-moblie .nav-menu .icon-exit:hover {
+  scale: 1.2;
+}
+
+.chat .option-moblie .line {
+  width: 100%;
+  height: 0.2rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 500%;
+  animation: bg 10s infinite ease;
+}
+
+.chat .option-moblie .history {
+  width: 100%;
+  height: 70%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.chat .option-moblie .history::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.chat .option-moblie .history::-webkit-scrollbar-track {
+  background-color: rgba(60, 16, 83, 0.4);
+}
+
+.chat .option-moblie .history::-webkit-scrollbar-thumb {
+  background-color: rgba(173, 83, 137, 0.5);
+}
+
+.chat .option-moblie .history .name-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 2px solid #E0EAFC;
+  border-radius: 1rem;
+  color: #E0EAFC;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.chat .option-moblie .history .name-icon:hover {
+  border-color: #ad5389;
+  box-shadow: inset 0 0 1rem #ad5389;
 }
