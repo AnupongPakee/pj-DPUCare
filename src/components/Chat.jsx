@@ -60,9 +60,9 @@ function Chat() {
           </div>
         </div>
         <div className="menu-moblie">
-          <FontAwesomeIcon icon={faPlus} className='icon-moblie' /> <br />
-          <FontAwesomeIcon icon={faMessage} className='icon-moblie' onClick={() => showOption(true)} /> <br />
-          <FontAwesomeIcon icon={faHome} className='icon-moblie' onClick={() => navigate("/pj-DPUCare/")} /> <br />
+          <FontAwesomeIcon icon={faPlus} className='icon-moblie' />
+          <FontAwesomeIcon icon={faMessage} className='icon-moblie' onClick={() => showOption(true)} />
+          <FontAwesomeIcon icon={faHome} className='icon-moblie' onClick={() => navigate("/pj-DPUCare/")} />
           <FontAwesomeIcon icon={faRightToBracket} className='icon-moblie' />
         </div>
         <div className="silde-right">

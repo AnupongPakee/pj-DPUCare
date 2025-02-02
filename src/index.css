@@ -117,9 +117,21 @@ select:-webkit-autofill:focus {
         grid-template-columns: 0% 100%;
     }
 
+    .chat .content {
+        display: block;
+    }
+
     .chat .silde-left,
     .chat .silde-right .resizer {
         display: none;
+    }
+
+    .chat .silde-right {
+        height: 94%;
+    }
+
+    .chat .menu-moblie {
+        display: flex;
     }
 }
 
@@ -198,9 +210,17 @@ select:-webkit-autofill:focus {
         grid-template-columns: 40% 60%;
     }
 
+    .chat .content {
+        display: flex;
+    }
+
     .chat .silde-left,
     .chat .silde-right .resizer {
         display: block;
+    }
+
+    .chat .silde-right {
+        height: 100%;
     }
 
     .chat .menu-moblie {
