@@ -82,7 +82,7 @@ function Chat() {
           </div>
           <div className="input">
             <form action="">
-              <input type="text" placeholder='ป้อนคำถาม' style={STYLE.font_family.th} />
+              <input type="text" placeholder='ป้อนคำถาม ?' style={STYLE.font_family.th} />
               <FontAwesomeIcon icon={faPaperPlane} className='icon-send' />
             </form>
             <button style={STYLE.font_family.th}>ประเมิน</button>

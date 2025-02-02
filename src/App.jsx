@@ -31,7 +31,7 @@ function App() {
             </div>
           </div>
           <form action="">
-            <input type="text" placeholder='ลองพิมพ์ดู' style={STYLE.font_family.th} />
+            <input type="text" placeholder='ป้อนคำถาม ?' style={STYLE.font_family.th} />
             <button type="submit">
               <FontAwesomeIcon icon={faPaperPlane} className='icon-send' />
             </button>
