@@ -429,7 +429,7 @@
   background-attachment: fixed;
   background-size: 100%;
   overflow: hidden;
-  animation: bg 10s ease-in-out; 
+  animation: bg 10s ease-in-out;
 }
 
 .chat .silde-left {
@@ -613,7 +613,7 @@
   align-items: center;
   width: 100%;
   border: 2px solid #E0EAFC;
-  border-radius: 2rem ;
+  border-radius: 2rem;
 }
 
 .chat .silde-right .input form input {
@@ -674,7 +674,7 @@
   left: 0;
   display: none;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 1rem;
   background: radial-gradient(circle, #ad5389, #3c1053);
 }
@@ -747,4 +747,81 @@
 .chat .option-moblie .history .name-icon:hover {
   border-color: #ad5389;
   box-shadow: inset 0 0 1rem #ad5389;
+}
+
+/* Component Admin.jsx */
+.admin {
+  padding: 1rem;
+  background: radial-gradient(circle, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 100%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+  overflow: hidden;
+}
+
+.admin .content {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.admin .date-time {
+  align-content: center;
+  grid-column: 1 / span 2;
+  padding: 1rem;
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .data {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  padding: 1rem;
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .chat {
+  grid-column: 4;
+  grid-row: 1 / span 3;
+  padding: 1rem;
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .logo {
+  grid-column: 1;
+  grid-row: 3;
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .prompt-templete {
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .token-calculator {
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .test {
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.admin .exit {
+  background-color: rgba(60, 16, 83, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
 }
