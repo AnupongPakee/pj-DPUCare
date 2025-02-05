@@ -280,20 +280,6 @@
   color: #E0EAFC;
 }
 
-.register .content .left .box-check {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-}
-
-.register .content .left .box-check input[type="checkbox"] {
-  margin: 0;
-  width: 1rem;
-  height: 1rem;
-  accent-color: #ba59e4;
-}
-
 .register .content .left form button {
   margin-top: 1.6rem;
   padding: 0.6rem 1rem;
@@ -376,20 +362,6 @@
 
 .login .content .right form input::placeholder {
   color: #E0EAFC;
-}
-
-.login .content .right .box-check {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-}
-
-.login .content .right .box-check input[type="checkbox"] {
-  margin: 0;
-  width: 1rem;
-  height: 1rem;
-  accent-color: #ba59e4;
 }
 
 .login .content .right form button {

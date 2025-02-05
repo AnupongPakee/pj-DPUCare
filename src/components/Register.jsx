@@ -36,9 +36,6 @@ function Register() {
             <input type="email" name='email' style={STYLE.font_family.th} placeholder='อีเมล์' /> <br />
             <input type="password" name='password' id='password' style={STYLE.font_family.th} placeholder='รหัสผ่าน' />
             <input type="password" name='confirm' id='confirm' style={STYLE.font_family.th} placeholder='ยืนยันรหัสอีกครั้ง' /> <br />
-            <div className="box-check">
-              <input type="checkbox" name="check_password" id="check_password" onClick={showPass} />
-            </div>
             <button type="submit">สร้างบัญชี</button>
           </form>
         </div>

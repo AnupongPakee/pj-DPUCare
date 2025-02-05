@@ -30,9 +30,6 @@ function Login() {
             <h1 style={STYLE.font_family.th}>เข้าสู่ระบบ</h1>
             <input type="text" name='username' style={STYLE.font_family.th} placeholder='ชื่อผู้ใช้ / อีเมล์' onChange={(e) => handleChange(e)} />
             <input type="password" name='password' id='password' style={STYLE.font_family.th} placeholder='รหัสผ่าน' />
-            <div className="box-check">
-              <input type="checkbox" name="check_password" id="check_password" onClick={showPass} />
-            </div>
             <button type="submit">ลงชื่อเข้าใช้</button>
           </form>
         </div>
