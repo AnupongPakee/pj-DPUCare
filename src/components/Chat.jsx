@@ -15,7 +15,6 @@ function Chat() {
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
 
-  const status = localStorage.getItem("status")
   const user_id = localStorage.getItem("id")
   const section_id = localStorage.getItem("section")
 
@@ -42,7 +41,7 @@ function Chat() {
   const getHistory = async () => {
     await axios.get(URL + "/history/" + section_id)
       .then((res) => {
-        setFirstMessage((res.data.firstChat))
+        setFirstMessage(res.data.firstChat)
         setMessage(res.data.secondChatAll)
       }).catch((err) => console.log(err))
   }
@@ -55,6 +54,10 @@ function Chat() {
           non_history.style.display = "flex";
         } else {
           non_history.style.display = "none";
+          if (localStorage.getItem("section") == null) {
+            localStorage.setItem("section", res.data[0].id)
+            location.reload()
+          }
           setSection(res.data)
         }
       })
@@ -80,11 +83,15 @@ function Chat() {
     localStorage.removeItem("section")
     await axios.delete(URL + "/section/" + id)
       .then((res) => {
-        console.log(res);
         getSection()
         getHistory()
       })
       .catch((err) => console.log(err))
+  }
+
+  const selectSection = (id) => {
+    localStorage.setItem("section", id)
+    location.reload()
   }
 
   const handleSubmit = async e => {
@@ -99,6 +106,11 @@ function Chat() {
     await axios.post(URL + "/history/" + section_id, form)
       .then((res) => getHistory())
       .catch((err) => console.log(err))
+  }
+
+  const logout = () => {
+    localStorage.clear()
+    navigate("/pj-DPUCare")
   }
 
   let state = 0
@@ -145,7 +157,7 @@ function Chat() {
               section.map((item, idx) => {
                 return (
                   <div className="name-icon" key={idx}>
-                    <p style={STYLE.font_family.th}>{item.name}</p>
+                    <p style={STYLE.font_family.th} onClick={() => selectSection(item.id)}>{item.name}</p>
                     <FontAwesomeIcon icon={faTrash} className='icon-delete' onClick={() => deleteSection(item.id)} />
                   </div>
                 )
@@ -155,14 +167,14 @@ function Chat() {
           <div className="line"></div>
           <div className="mini-menu">
             <FontAwesomeIcon icon={faHome} className='icon-mini' title='กลับไปหน้าแรก' onClick={() => navigate("/pj-DPUCare")} />
-            <FontAwesomeIcon icon={faRightToBracket} className='icon-mini' title='ออกจากระบบ' />
+            <FontAwesomeIcon icon={faRightToBracket} className='icon-mini' title='ออกจากระบบ' onClick={() => logout()} />
           </div>
         </div>
         <div className="menu-moblie">
           <FontAwesomeIcon icon={faPlus} className='icon-moblie' onClick={() => newSection()} />
           <FontAwesomeIcon icon={faMessage} className='icon-moblie' onClick={() => showOption(true)} />
           <FontAwesomeIcon icon={faHome} className='icon-moblie' onClick={() => navigate("/pj-DPUCare/")} />
-          <FontAwesomeIcon icon={faRightToBracket} className='icon-moblie' />
+          <FontAwesomeIcon icon={faRightToBracket} className='icon-moblie' onClick={() => logout()} />
         </div>
         <div className="silde-right">
           <div className="resizer" onClick={() => showSlideLeft(true)}></div>
@@ -212,7 +224,7 @@ function Chat() {
             section.map((item, idx) => {
               return (
                 <div className="name-icon" key={idx}>
-                  <p style={STYLE.font_family.th}>{item.name}</p>
+                  <p style={STYLE.font_family.th} onClick={() => selectSection(item.id)}>{item.name}</p>
                   <FontAwesomeIcon icon={faTrash} className='icon-delete' onClick={() => deleteSection(item.id)} />
                 </div>
               )

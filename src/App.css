@@ -102,6 +102,7 @@
 }
 
 .home .content .chat .show-message .human-message {
+  background-color: rgba(60, 16, 83, 0.4);
   border-radius: 1rem 0 1rem 1rem;
 }
 
@@ -478,6 +479,10 @@
   box-shadow: inset 0 0 1rem #ad5389;
 }
 
+.chat .silde-left .history .name-icon p {
+  width: 100%;
+}
+
 .chat .silde-left .history .name-icon .icon-delete {
   transition: all 0.6s ease-in-out;
 }
@@ -737,6 +742,10 @@
 .chat .option-moblie .history .name-icon:hover {
   border-color: #ad5389;
   box-shadow: inset 0 0 1rem #ad5389;
+}
+
+.chat .option-moblie .history .name-icon p {
+  width: 100%;
 }
 
 /* Component Admin.jsx */

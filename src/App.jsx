@@ -11,7 +11,9 @@ function App() {
   const [time, setTime] = useState(new Date());
   const [form, setForm] = useState({})
   const [text, setText] = useState({})
+  const [firstMessage, setFirstMessage] = useState({})
   const [message, setMessage] = useState([])
+  const [messageDb, setMessageDb] = useState([])
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
 
@@ -33,11 +35,12 @@ function App() {
       })
     }
     getHistory()
+    getSection()
   }, [])
 
   useEffect(() => {
     scrollToBottom()
-  }, [message])
+  }, [message, messageDb])
 
   const handleChange = e => {
     setForm({
@@ -51,8 +54,20 @@ function App() {
   const getHistory = async () => {
     await axios.get(URL + "/history/" + section_id)
       .then((res) => {
-        console.log(res);
+        setFirstMessage(res.data.firstChat)
+        setMessageDb(res.data.secondChatAll)
       }).catch((err) => console.log(err))
+  }
+
+  const getSection = async () => {
+    await axios.get(URL + "/section/" + user_id)
+      .then((res) => {
+        if (localStorage.getItem("section") == null) {
+          localStorage.setItem("section", res.data[0].id)
+          location.reload()
+        }
+      })
+      .catch((err) => console.log(err))
   }
 
   const handleSubmit = async e => {
@@ -63,25 +78,36 @@ function App() {
       question: form.question,
       answer: "กำลังพิมพ์..."
     }
-    setMessage([...message, rawMessage])
-    if (message.length >= 3) {
-      localStorage.setItem("limit", 0)
-    }
-    if (localStorage.getItem("limit", 0)) {
-      setMessage([...message, {
-        question: form.question,
-        answer: "คุณใช้จำนวนคำถามที่มีอยู่หมดแล้ว กรุณาสร้างบัญชีหรือเข้าสู่ระบบเพื่อดำเนินการสนทนาต่อ"
-      }])
-    } else {
-      await axios.post(URL + "/history", form)
+    if (status == "sucess" && user_id != null) {
+      setMessageDb([...messageDb, rawMessage])
+      await axios.post(URL + "/history/" + section_id, form)
         .then((res) => {
-          setMessage([...message, {
-            question: form.question,
-            answer: res.data.answer
-          }])
+          console.log(res);
           scrollToBottom()
+          getHistory()
         })
         .catch((err) => console.log(err))
+    } else {
+      setMessage([...message, rawMessage])
+      if (message.length >= 3) {
+        localStorage.setItem("limit", 0)
+      }
+      if (localStorage.getItem("limit", 0)) {
+        setMessage([...message, {
+          question: form.question,
+          answer: "คุณใช้จำนวนคำถามที่มีอยู่หมดแล้ว กรุณาสร้างบัญชีหรือเข้าสู่ระบบเพื่อดำเนินการสนทนาต่อ"
+        }])
+      } else {
+        await axios.post(URL + "/history", form)
+          .then((res) => {
+            setMessage([...message, {
+              question: form.question,
+              answer: res.data.answer
+            }])
+            scrollToBottom()
+          })
+          .catch((err) => console.log(err))
+      }
     }
   }
 
@@ -118,10 +144,21 @@ function App() {
           <div className="show-message">
             <FontAwesomeIcon icon={faExpand} className='icon-full' onClick={() => nextPage("chat")} />
             <div className='ai'>
-              <p className='ai-message' style={STYLE.font_family.th}>สวัสดีค่ะ หากคุณต้องการพูดคุยหรือระบายความรู้สึก ฉันอยู่ที่นี่เพื่อรับฟังและช่วยแนะนำวิธีผ่อนคลายให้คุณนะค่ะ</p>
+              <p className='ai-message' style={STYLE.font_family.th}>{(status == "sucess" && user_id != null) ? firstMessage.answer : "สวัสดีค่ะ หากคุณต้องการพูดคุยหรือระบายความรู้สึก ฉันอยู่ที่นี่เพื่อรับฟังและช่วยแนะนำวิธีผ่อนคลายให้คุณนะค่ะ"}</p>
             </div>
             {
-              message.map((item, idx) => {
+              (status == "sucess" && user_id != null) ? messageDb.map((item, idx) => {
+                return (
+                  <div key={idx}>
+                    <div className='human'>
+                      <p className='human-message' style={STYLE.font_family.th}>{item.question}</p>
+                    </div>
+                    <div className='ai'>
+                      <p className='ai-message' style={STYLE.font_family.th}>{item.answer}</p>
+                    </div>
+                  </div>
+                )
+              }) : message.map((item, idx) => {
                 return (
                   <div key={idx}>
                     <div className='human'>
