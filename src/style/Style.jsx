@@ -15,6 +15,15 @@ const style = {
             letterSpacing: "1px"
         }
     },
+    "theme": {
+        "default": {
+            width: "100vw",
+            height: "100vh",
+            background: "radial-gradient(circle, #ad5389, #3c1053)",
+            backgroundAttachment: "fixed",
+            backgroundSize: "100%"
+        },
+    }
 }
 
 export default style;

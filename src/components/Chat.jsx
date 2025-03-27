@@ -2,16 +2,24 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faRightToBracket, faTrash, faMessage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from "react-router-dom"
-import axios from 'axios'
 
 import STYLE from "../style/Style"
+import THEMES from "../style/Themes"
+import { 
+  get_history, 
+  get_section,
+  new_section,
+  del_section, 
+  new_message,
+  test_connect } from "../API"
+import Toast from './Toast'
 
 function Chat() {
-  const URL = "http://127.0.0.1:8000"
   const [form, setForm] = useState({})
   const [firstMessage, setFirstMessage] = useState({})
   const [message, setMessage] = useState([])
   const [section, setSection] = useState([])
+  const [toast, setToast] = useState({ "show": "false", "theme": "MinnesotaVikings" })
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
 
@@ -19,6 +27,19 @@ function Chat() {
   const section_id = localStorage.getItem("section")
 
   useEffect(() => {
+    test_connect()
+      .then((_) => {
+        console.log("connect: success");
+      }).catch((err) => {
+        console.log(err);
+        setToast({
+          "show": "true",
+          "status": "mistake",
+          "text": "ติดต่อกับฝั่งเซิฟร์เวอร์ไม่สำเร็จ",
+          "theme": "MinnesotaVikings",
+          "duration": 3000
+        })
+      })
     getHistory()
     getSection()
   }, [])
@@ -39,7 +60,7 @@ function Chat() {
   const scrollToBottom = () => messageEndRef.current?.scrollIntoView({ behavior: 'smooth' })
 
   const getHistory = async () => {
-    await axios.get(URL + "/history/" + section_id)
+    get_history(section_id)
       .then((res) => {
         setFirstMessage(res.data.firstChat)
         setMessage(res.data.secondChatAll)
@@ -48,7 +69,7 @@ function Chat() {
 
   const getSection = async () => {
     const non_history = document.getElementById("non-history")
-    await axios.get(URL + "/section/" + user_id)
+    get_section(user_id)
       .then((res) => {
         if (res.data.length == 0) {
           non_history.style.display = "flex";
@@ -65,12 +86,12 @@ function Chat() {
   }
 
   const newSection = async () => {
-    await axios.post(URL + "/section/" + user_id)
+    new_section(user_id)
       .then(async (res) => {
         getSection()
         localStorage.setItem("section", res.data.id)
         await axios.post(URL + "/history/" + res.data.id, { "question": "สวัสดี" })
-          .then((res) => {
+          .then((_) => {
             getHistory()
             location.reload()
           })
@@ -81,8 +102,8 @@ function Chat() {
 
   const deleteSection = async id => {
     localStorage.removeItem("section")
-    await axios.delete(URL + "/section/" + id)
-      .then((res) => {
+    del_section(id)
+      .then((_) => {
         getSection()
         getHistory()
       })
@@ -103,8 +124,8 @@ function Chat() {
       answer: "กำลังพิมพ์..."
     }
     setMessage([...message, rawMessage])
-    await axios.post(URL + "/history/" + section_id, form)
-      .then((res) => getHistory())
+    new_message(section_id, form)
+      .then((_) => getHistory())
       .catch((err) => console.log(err))
   }
 
@@ -147,7 +168,7 @@ function Chat() {
     }
   }
   return (
-    <div className='container chat' style={STYLE.container}>
+    <div className='container chat' style={THEMES.MinnesotaVikings.background}>
       <div className="content">
         <div className="silde-left" id='slide-left'>
           <button style={STYLE.font_family.th} onClick={() => newSection()}>เพิ่มแชทใหม่</button>
@@ -236,6 +257,7 @@ function Chat() {
       <div className="not-support">
         <h1 style={STYLE.font_family.en}>Not Support</h1>
       </div>
+      <Toast data={toast}/>
     </div>
   )
 }
