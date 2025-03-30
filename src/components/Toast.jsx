@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faRepeat, faFlag } from "@fortawesome/free-solid-svg-icons"
 import { motion } from "framer-motion"
 
-import STYLE from "../style/Style"
 import THEMES from "../style/Themes"
-import { handleToast } from "../utils"
+import LANGUAGES from "../style/Language"
+import { create_report } from "../API"
 
 function Toast(props) {
   const [progress, setProgress] = useState(0)
-  
-  const { show, status, text, icon, font, flag, report, duration, theme } = props.data
+  const [checkReport, setCheckReport] = useState(false)
+
+  const { show, status, text, icon, font, flag, report, duration, drive, theme } = props.data
 
   useEffect(() => {
     let start = null;
@@ -27,6 +28,19 @@ function Toast(props) {
     };
     requestAnimationFrame(animate);
   }, [duration]);
+
+  const handleReport = async () => {
+    if (flag) {
+      create_report(report)
+        .then((_) => {
+          setCheckReport(true)
+        }).catch((err) => {
+          console.log(err);
+        })
+    } else {
+      window.location.reload()
+    }
+  }
 
   const raw_style = {
     "show": { true: { display: "block" }, false: { display: "none" } },
@@ -48,18 +62,18 @@ function Toast(props) {
 
   return (
     <div className='container toast' style={raw_style.show[show ? show : false]}>
-      <div className="content" style={THEMES[theme].toast.color}>
-        <div className="header" style={THEMES[theme].toast.header}>
+      <div className="content" style={THEMES[drive][theme].fontcolor}>
+        <div className="header" style={THEMES[drive][theme].toast.header}>
           <div className="left">
-            <div className="status" style={raw_style.status[status]}></div>
-            <h1 style={STYLE.font_family.th}>แจ้งเตือน</h1>
+            <div className="status" style={checkReport ? raw_style.status["success"] : raw_style.status[status]}></div>
+            <h1 style={LANGUAGES.font[font]}>{LANGUAGES.language[font ? font : "en"].warn.notifications}</h1>
           </div>
-          <FontAwesomeIcon icon={flag ? faFlag : faRepeat} style={raw_style.icon[icon]} className='icon' onClick={() => handleToast(flag, report)} />
+          <FontAwesomeIcon icon={flag ? faFlag : faRepeat} style={checkReport ? raw_style.icon[false] : raw_style.icon[icon]} className='icon' onClick={() => handleReport()} />
         </div>
-        <div className="mean" style={THEMES[theme].toast.mean}>
-          <p style={STYLE.font_family[font]}>{text}</p>
+        <div className="mean" style={THEMES[drive][theme].toast.mean}>
+          <p style={LANGUAGES.font[font]}>{checkReport ? LANGUAGES.language[font ? font : "en"].warn.report_text : text}</p>
         </div>
-        <motion.div className="loader" initial={{width: "0%"}} animate={{width: `${progress}%`}} transition={{duration: 0.5, ease: "easeOut"}} style={THEMES[theme].toast.loader}></motion.div>
+        <motion.div className="loader" initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.5, ease: "easeOut" }} style={THEMES[drive][theme].toast.loader}></motion.div>
       </div>
     </div>
   )

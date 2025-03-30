@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPaperPlane, faExpand } from "@fortawesome/free-solid-svg-icons"
+import { faPaperPlane, faExpand, faThermometer } from "@fortawesome/free-solid-svg-icons"
 import axios from 'axios'
 
+import { get_history, get_section, new_message, test_connect } from "./API"
 import STYLE from "./style/Style"
 import THEMES from "./style/Themes"
-import { get_history, get_section, new_message, test_connect } from "./API"
+import LANGUAGES from "./style/Language"
 import Toast from './components/Toast'
 
 function App() {
@@ -16,17 +17,35 @@ function App() {
   const [firstMessage, setFirstMessage] = useState({})
   const [message, setMessage] = useState([])
   const [messageDb, setMessageDb] = useState([])
-  const [setting, setSetting] = useState({display: "none"})
+  const [setting, setSetting] = useState({ display: "none" })
+  const [platform, setPlatform] = useState("window")
+  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "th")
+  const [stateLanguage, setStateLanguage] = useState(0);
   const [theme, setTheme] = useState("default")
-  const [toast, setToast] = useState({ "show": "false", "theme": "default" })
+  const [toast, setToast] = useState(
+    {
+      "show": false,
+      "status": "warn",
+      "text": LANGUAGES.language[language].warn.wait,
+      "icon": false,
+      "font": language,
+      "flag": false,
+      "duration": 3000,
+      "drive": platform,
+      "theme": theme,
+      "report": ""
+    })
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
 
   const status = localStorage.getItem("status")
   const user_id = localStorage.getItem("id")
-  const section_id = localStorage.getItem("section")
+  const section_id = localStorage.getItem("section_id")
 
   useEffect(() => {
+    if (window.screen.width < 1280) {
+      setPlatform("phone")
+    }
     test_connect()
       .then((_) => {
         console.log("connect: success");
@@ -36,35 +55,49 @@ function App() {
           "show": true,
           "status": "mistake",
           "text": "เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองอีกครั้งในภายหลัง",
+          "icon": true,
           "font": "th",
+          "flag": false,
           "duration": 3000,
+          "drive": platform,
           "theme": theme
         })
       })
+    const profile = document.getElementById("profile")
+    profile.className = `profile ${theme}`
     setInterval(() => setTime(new Date()), 1000)
-    if (status == "sucess" && user_id != null) {
-      setText({
-        setting: "การต้้งค่า",
-        exit: "ออก"
-      })
-      setToast({
-        "show": "true",
-        "status": "success",
-        "text": "คุณเข้าสู่ระบบเรียบร้อยแล้ว ขอให้สนุกกับการใช้งาน 😊",
-        "reload": "false"
-      })
-      setTimeout(() => {
-        setToast({ "show": "false" })
-      }, 4500);
-    } else {
-      setText({
-        setting: "เข้าสู่ระบบ",
-        exit: "สร้างบัญชี"
-      })
-    }
     getHistory()
     getSection()
   }, [])
+
+  useEffect(() => {
+    const icon_full = document.getElementById("icon-full")
+    if (status == "sucess" && user_id != null) {
+      setText({
+        setting: LANGUAGES.language[language].setting,
+        exit: LANGUAGES.language[language].exit
+      })
+      setToast({
+        "show": true,
+        "status": "success",
+        "text": "คุณเข้าสู่ระบบเรียบร้อยแล้ว ขอให้สนุกกับการใช้งาน 😊",
+        "icon": false,
+        "font": "th",
+        "flag": false,
+        "duration": 3000,
+        "drive": platform,
+        "theme": theme
+      })
+      handleTime(3500)
+    } else {
+      profile.style.cursor = "not-allowed";
+      icon_full.style.display = "none"
+      setText({
+        setting: LANGUAGES.language[language].sign_in,
+        exit: LANGUAGES.language[language].create_account
+      })
+    }
+  }, [language])
 
   useEffect(() => {
     scrollToBottom()
@@ -75,6 +108,12 @@ function App() {
       ...form,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleTime = (second) => {
+    setTimeout(() => {
+      setToast({ "show": false, "drive": platform, "theme": theme })
+    }, second);
   }
 
   const scrollToBottom = () => messageEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -90,8 +129,8 @@ function App() {
   const getSection = async () => {
     get_section(user_id)
       .then((res) => {
-        if (localStorage.getItem("section") == null) {
-          localStorage.setItem("section", res.data[0].id)
+        if (localStorage.getItem("section_id") == null) {
+          localStorage.setItem("section_id", res.data[0].id)
           location.reload()
         }
       })
@@ -144,7 +183,7 @@ function App() {
       if (check == "chat") {
         navigate("/pj-DPUCare/chat")
       } else if (check == "setting") {
-        setSetting({display: "block"})
+        setSetting({ display: "block" })
       } else if (check == "exit") {
         localStorage.clear()
         location.reload()
@@ -159,13 +198,30 @@ function App() {
       } else if (check == "exit") {
         navigate("/pj-DPUCare/register")
       } else if (check == "profile") {
-        navigate("/pj-DPUCare/register")
       }
     }
   }
 
+  const changeLanguage = (check) => {
+    if (check) {
+      setStateLanguage((prev) => {
+        const newState = prev + 1;
+        if (newState === 1) {
+          setLanguage("en")
+          localStorage.setItem("language", "en")
+        };
+        if (newState === 2) {
+          setLanguage("th");
+          localStorage.setItem("language", "th")
+          return 0;
+        }
+        return newState;
+      });
+    }
+  };
+
   return (
-    <div className='container home' style={THEMES[theme].background}>
+    <div className='container home' style={THEMES[platform][theme].background}>
       <div className="content">
         <div className="date-time">
           <h1 style={STYLE.font_family.en}>{time.toLocaleTimeString()}</h1>
@@ -174,9 +230,13 @@ function App() {
         <div className="chat-home">
           <h1 style={STYLE.font_family.th} onClick={() => nextPage("chat")}>แชทบอท</h1>
           <div className="show-message">
-            <FontAwesomeIcon icon={faExpand} className='icon-full' onClick={() => nextPage("chat")} />
+            <div className="mini-icon">
+              <h2 className='icon-language' style={LANGUAGES.font[language]} onClick={() => changeLanguage(true)} >{language}</h2>
+              <FontAwesomeIcon icon={faThermometer} className='icon-theme' onClick={() => nextPage("chat")} />
+              <FontAwesomeIcon icon={faExpand} className='icon-full' id='icon-full' onClick={() => nextPage("chat")} />
+            </div>
             <div className='ai'>
-              <p className='ai-message' style={STYLE.font_family.th}>{(status == "sucess" && user_id != null) ? firstMessage.answer : "สวัสดีค่ะ หากคุณต้องการพูดคุยหรือระบายความรู้สึก ฉันอยู่ที่นี่เพื่อรับฟังและช่วยแนะนำวิธีผ่อนคลายให้คุณนะค่ะ"}</p>
+              <p className='ai-message' style={STYLE.font_family.th}>{(status == "sucess" && user_id != null) ? firstMessage.answer : LANGUAGES.language[language].first_message}</p>
             </div>
             {
               (status == "sucess" && user_id != null) ? messageDb.map((item, idx) => {
@@ -238,18 +298,18 @@ function App() {
               </div>
             </div>
             <div className="btn-2">
-              <button onClick={() => setSetting({display: "none"})}>ยกเลิก</button>
+              <button onClick={() => setSetting({ display: "none" })}>ยกเลิก</button>
               <button type="submit">ยืนยัน</button>
             </div>
           </form>
         </div>
-        <div className="profile" style={STYLE.font_family.th} onClick={() => nextPage("profile")}>
-          <h1>โปรไฟล์</h1>
+        <div className="profile" id='profile' onClick={() => nextPage("profile")}>
+          <h1>{LANGUAGES.language[language].profile}</h1>
         </div>
         <div className="exit" style={STYLE.font_family.th} onClick={() => nextPage("exit")}>{text.exit}</div>
       </div>
       <div className="not-support">
-        <h1 style={STYLE.font_family.en}>Not Support</h1>
+        <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].not_support}</h1>
       </div>
       <Toast data={toast}></Toast>
     </div>

@@ -19,7 +19,7 @@ function Chat() {
   const [firstMessage, setFirstMessage] = useState({})
   const [message, setMessage] = useState([])
   const [section, setSection] = useState([])
-  const [toast, setToast] = useState({ "show": "false", "theme": "MinnesotaVikings" })
+  const [toast, setToast] = useState({ "show": "false", "theme": "default" })
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
 
@@ -36,7 +36,7 @@ function Chat() {
           "show": "true",
           "status": "mistake",
           "text": "ติดต่อกับฝั่งเซิฟร์เวอร์ไม่สำเร็จ",
-          "theme": "MinnesotaVikings",
+          "theme": "default",
           "duration": 3000
         })
       })
@@ -168,7 +168,7 @@ function Chat() {
     }
   }
   return (
-    <div className='container chat' style={THEMES.MinnesotaVikings.background}>
+    <div className='container chat' style={THEMES.default.background}>
       <div className="content">
         <div className="silde-left" id='slide-left'>
           <button style={STYLE.font_family.th} onClick={() => newSection()}>เพิ่มแชทใหม่</button>
