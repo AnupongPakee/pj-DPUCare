@@ -13,6 +13,10 @@ export const register = async (data) =>
 export const new_profile = async (id, data) => 
     await axios.put(import.meta.env.VITE_API + "/profile/" + id, data)
 
+export const get_profile = async (id) => {
+    return await axios.get(import.meta.env.VITE_API + "/profile/" + id)
+}
+
 export const new_section = async (id) =>
     await axios.post(import.meta.env.VITE_API + "/section/" + id)
 

@@ -67,11 +67,13 @@ function Chat() {
     const line3 = document.getElementById("line3")
     const line4 = document.getElementById("line4")
     const resizer = document.getElementById("resizer")
+    const non_chathistory = document.getElementById("non-history")
     line.className = `line ${theme}`
     line2.className = `line ${theme}`
     line3.className = `line ${theme}`
     line4.className = `line ${theme}`
     resizer.className = `resizer ${theme}`
+    non_chathistory.className = `non-history ${theme}`
     getHistory()
     getSection()
   }, [])
@@ -238,6 +240,7 @@ function Chat() {
       .then((_) => {
         getSection()
         getHistory()
+        window.location.reload()
         return;
       })
       .catch((err) => {

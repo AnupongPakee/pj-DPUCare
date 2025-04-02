@@ -85,35 +85,41 @@ function Login() {
         .then((res) => {
           localStorage.setItem("status", "sucess")
           localStorage.setItem("id", res.data.id)
-          get_section(res.data.id)
-            .then((res) => {
-              localStorage.setItem("section_id", res.data[0].section_id)
-              navigate("/pj-DPUCare")
-            }).catch((err) => {
-              console.log(err);
-              setToast({
-                "show": true,
-                "status": "mistake",
-                "text": LANGUAGES.language[language].warn.error,
-                "icon": true,
-                "font": language,
-                "flag": true,
-                "duration": 10000,
-                "drive": platform,
-                "theme": theme,
-                "report": {
-                  timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                  issue_type: "server",
-                  user_id: "non-user",
-                  title: "get_section",
-                  description: err.message,
-                  severity: "hight",
-                  status: "wait",
-                }
+          if (res.data.role == "admin") {
+            navigate("/pj-DPUCare/admin")
+          } else {
+            get_section(res.data.id)
+              .then((res) => {
+                localStorage.setItem("section_id", res.data[0].section_id)
+                navigate("/pj-DPUCare")
               })
-              handleTime(10500)
-              return;
-            })
+              .catch((err) => {
+                console.log(err);
+                // Note Error for logout not section id
+                setToast({
+                  "show": true,
+                  "status": "mistake",
+                  "text": LANGUAGES.language[language].warn.error,
+                  "icon": true,
+                  "font": language,
+                  "flag": true,
+                  "duration": 10000,
+                  "drive": platform,
+                  "theme": theme,
+                  "report": {
+                    timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                    issue_type: "server",
+                    user_id: "non-user",
+                    title: "get_section",
+                    description: err.message,
+                    severity: "hight",
+                    status: "wait",
+                  }
+                })
+                handleTime(10500)
+                return;
+              })
+          }
         })
         .catch((err) => {
           console.log(err);
