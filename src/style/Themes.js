@@ -96,12 +96,12 @@ const theme = {
                 },
             },
         },
-        WhatliesBeyond: {
+        UltraVoilet: {
             background: {
-                backgroundColor: "#000C40",
-                backgroundImage: `radial-gradient(circle 40rem at 100% 0%, #F0F2F0, transparent), 
-                              radial-gradient(circle 50rem at 0% 50%, #F0F2F0, transparent),
-                              radial-gradient(circle 30rem at 70% 100%, #F0F2F0, transparent)`,
+                backgroundColor: "#654ea3",
+                backgroundImage: `radial-gradient(circle 40rem at 100% 0%, #eaafc8, transparent), 
+                              radial-gradient(circle 50rem at 0% 50%, #eaafc8, transparent),
+                              radial-gradient(circle 30rem at 70% 100%, #eaafc8, transparent)`,
                 backgroundAttachment: "fixed",
                 backgroundSize: "100%",
             },
@@ -110,13 +110,13 @@ const theme = {
             },
             toast: {
                 header: {
-                    backgroundColor: "rgba(0, 12, 64, 0.8)",
+                    backgroundColor: "rgba(101, 78, 163, 0.8)",
                 },
                 mean: {
-                    backgroundColor: "rgba(0, 12, 64, 0.6)",
+                    backgroundColor: "rgba(101, 78, 163, 0.6)",
                 },
                 loader: {
-                    backgroundImage: "linear-gradient(to right, #000C40, #F0F2F0)",
+                    backgroundImage: "linear-gradient(to right, #654ea3, #eaafc8)",
                 },
             },
         },
@@ -266,12 +266,12 @@ const theme = {
                 },
             },
         },
-        WhatliesBeyond: {
+        UltraVoilet: {
             background: {
-                backgroundColor: "#000C40",
-                backgroundImage: `radial-gradient(circle 20rem at 100% 0%, #F0F2F0, transparent), 
-                              radial-gradient(circle 30rem at 0% 50%, #F0F2F0, transparent),
-                              radial-gradient(circle 20rem at 70% 100%, #F0F2F0, transparent)`,
+                backgroundColor: "#654ea3",
+                backgroundImage: `radial-gradient(circle 40rem at 100% 0%, #eaafc8, transparent), 
+                              radial-gradient(circle 50rem at 0% 50%, #eaafc8, transparent),
+                              radial-gradient(circle 30rem at 70% 100%, #eaafc8, transparent)`,
                 backgroundAttachment: "fixed",
                 backgroundSize: "100%",
             },
@@ -280,13 +280,13 @@ const theme = {
             },
             toast: {
                 header: {
-                    backgroundColor: "rgba(0, 12, 64, 0.8)",
+                    backgroundColor: "rgba(101, 78, 163, 0.8)",
                 },
                 mean: {
-                    backgroundColor: "rgba(0, 12, 64, 0.6)",
+                    backgroundColor: "rgba(101, 78, 163, 0.6)",
                 },
                 loader: {
-                    backgroundImage: "linear-gradient(to right, #000C40, #F0F2F0)",
+                    backgroundImage: "linear-gradient(to right, #654ea3, #eaafc8)",
                 },
             },
         },

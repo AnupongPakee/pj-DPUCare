@@ -47,7 +47,8 @@ function Toast(props) {
     "status": {
       "success": { backgroundColor: "#24ff42" },
       "warn": { backgroundColor: "#ffda24" },
-      "mistake": { backgroundColor: "#ff2424" }
+      "mistake": { backgroundColor: "#ff2424" },
+      "admin": { backgroundColor: "rgb(210, 189, 0)" }
     },
     "icon": { true: { display: "block" }, false: { display: "none" } },
     "en": {

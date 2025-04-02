@@ -131,11 +131,8 @@
 }
 
 .home .content .chat-home .show-message .human-message {
-  background-color: rgba(60, 16, 83, 0.4);
   border-radius: 1rem 0 1rem 1rem;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
   overflow: hidden;
 }
 
@@ -206,63 +203,8 @@
   cursor: pointer;
 }
 
-.home .content .default:hover {
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
-.home .content .GradeGrey:hover {
-  background: linear-gradient(45deg, #2c3e50, #bdc3c7, #2c3e50);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
-.home .content .PinkFlavour:hover {
-  background: linear-gradient(45deg, #800080, #ffc0cb, #800080);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
-.home .content .VisionsofGrandeur:hover {
-  background: linear-gradient(45deg, #000046, #1CB5E0, #000046);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
-.home .content .WhatliesBeyond:hover {
-  background: linear-gradient(45deg, #000C40, #F0F2F0, #000C40);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
-.home .content .TheBlueLagoon:hover {
-  background: linear-gradient(45deg, #43C6AC, #191654, #43C6AC);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
-.home .content .CalmDarya:hover {
-  background: linear-gradient(45deg, #5f2c82, #49a09d, #5f2c82);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
 .home .content .profile h1 {
+  text-transform: uppercase;
   font-size: 1.4rem;
   color: #E0EAFC;
 }
@@ -280,13 +222,6 @@
   transition: all 0.6s ease-in-out;
 }
 
-.home .content .setting:hover {
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
 
 .home .content .show-setting {
   display: none;
@@ -351,7 +286,7 @@
 
 .home .show-setting .theme-default {
   padding: 0.6rem 0.8rem;
-  background-image: linear-gradient(to left,#ad5389, #3c1053);
+  background-image: linear-gradient(to left, #ad5389, #3c1053);
   color: #E0EAFC;
   border-radius: 2rem;
 }
@@ -434,14 +369,6 @@
   transition: all 0.6s ease-in-out;
 }
 
-.home .content .exit:hover {
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
-  overflow: hidden;
-  animation: bg 10s ease-in-out;
-}
-
 /* Components Register.jsx */
 .register {
   width: 100vw;
@@ -497,7 +424,7 @@
   color: #E0EAFC;
 }
 
-.register .content .left form button {
+.register .content .btn-rgs {
   margin-top: 1.6rem;
   padding: 0.6rem 1rem;
   background: none;
@@ -508,36 +435,29 @@
   transition: all 0.4s ease-in-out;
 }
 
-.register .content .left form button:hover {
+.register .content .btn-rgs:hover {
   padding: 0.6rem 1.6rem;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
-  animation: bg-ift 4s infinite ease;
 }
 
-.register .content .right {
-  background-image: url("images/lgn_rgs.jpg");
-  background-size: cover;
-  background-attachment: fixed;
+.register .content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .register .new-profile {
   position: absolute;
   top: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
 }
 
 .register .new-profile form {
   position: relative;
-  width: 40%;
   padding: 1.6rem;
   border: 2px solid #E0EAFC;
 }
@@ -557,7 +477,7 @@
   color: #E0EAFC;
 }
 
-.register .new-profile .label-sex  {
+.register .new-profile .label-sex {
   display: flex;
   align-items: center;
   width: 100%;
@@ -567,11 +487,10 @@
   overflow: hidden;
 }
 
-.register .new-profile .label-sex h1 {
+.register .new-profile .label-sex .h1-sex {
   width: 30%;
   height: 100%;
   padding: 1rem;
-  background-color: #ad5389;
   color: #E0EAFC;
 }
 
@@ -587,10 +506,6 @@
   transition: all 0.4s ease-in-out;
 }
 
-.register .new-profile .sex label:hover {
-  background-color: #ad5389;
-}
-
 .register .new-profile .label-age {
   display: flex;
   align-items: center;
@@ -601,11 +516,10 @@
   overflow: hidden;
 }
 
-.register .new-profile .label-age h1 {
+.register .new-profile .label-age .h1-age {
   width: 30%;
   height: 100%;
   padding: 1rem;
-  background-color: #ad5389;
   color: #E0EAFC;
 }
 
@@ -633,12 +547,18 @@
   overflow: hidden;
 }
 
-.register .new-profile .label-job h1 {
+.register .new-profile .label-job .h1-job {
+  position: relative;
   width: 30%;
   height: 100%;
   padding: 1rem;
-  background-color: #ad5389;
   color: #E0EAFC;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.register .new-profile .label-job .h1-job::-webkit-scrollbar {
+  display: none;
 }
 
 .register .new-profile .job {
@@ -687,6 +607,7 @@
 .login {
   width: 100vw;
   height: 100vh;
+  animation: bg 10s ease-in-out;
 }
 
 .login .content {
@@ -697,10 +618,10 @@
   overflow: hidden;
 }
 
-.login .content .left {
-  background-image: url("images/lgn_rgs.jpg");
-  background-size: cover;
-  background-attachment: fixed;
+.login .content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .login .content .right {
@@ -709,9 +630,6 @@
   text-align: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 100%;
   overflow: hidden;
   animation: bg 10s ease-in-out;
 }
@@ -747,7 +665,7 @@
   color: #E0EAFC;
 }
 
-.login .content .right form button {
+.login .content .btn-login {
   margin-top: 1.6rem;
   padding: 0.6rem 1rem;
   background: none;
@@ -758,12 +676,8 @@
   transition: all 0.4s ease-in-out;
 }
 
-.login .content .right form button:hover {
+.login .content .btn-login:hover {
   padding: 0.6rem 1.6rem;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
-  animation: bg 4s infinite ease;
 }
 
 @keyframes start-form {
@@ -786,9 +700,6 @@
 .chat .content {
   width: 100%;
   height: 100%;
-  /* background: radial-gradient(circle, #ad5389, #3c1053); */
-  background-attachment: fixed;
-  background-size: 100%;
   overflow: hidden;
 }
 
@@ -797,7 +708,7 @@
   width: 30%;
   height: 100%;
   padding: 1rem;
-  background-color: rgba(60, 16, 83, 0.4);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .chat .silde-left button {
@@ -811,16 +722,14 @@
 }
 
 .chat .silde-left button:hover {
-  border-color: #ad5389;
-  box-shadow: inset 0 0 1rem #ad5389;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .chat .silde-left .line {
   width: 100%;
   height: 0.2rem;
   margin: 1rem 0;
-  border-radius: 1rem;
-  background-color: #ad5389;
+  border-radius: 1rem
 }
 
 .chat .silde-left .history {
@@ -858,8 +767,7 @@
 }
 
 .chat .silde-left .history .name-icon:hover {
-  border-color: #ad5389;
-  box-shadow: inset 0 0 1rem #ad5389;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .chat .silde-left .history .name-icon p {
@@ -888,7 +796,6 @@
 
 .chat .silde-left .mini-menu .icon-mini:hover {
   scale: 1.2;
-  color: #ad5389;
 }
 
 .chat .menu-moblie {
@@ -896,7 +803,7 @@
   align-items: center;
   width: 100%;
   padding: 1rem;
-  background-color: rgba(173, 83, 137, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .chat .menu-moblie .icon-moblie {
@@ -925,7 +832,6 @@
   left: 0;
   width: 0.2rem;
   height: 100%;
-  background-color: #ad5389;
   cursor: alias;
 }
 
@@ -988,16 +894,16 @@
 .chat .silde-right .input form {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: centeer;
   width: 100%;
+  height: 50%;
   border: 2px solid #E0EAFC;
   border-radius: 2rem;
 }
 
 .chat .silde-right .input form input {
   width: 100%;
-  height: 3rem;
-  padding-left: 1rem;
+  padding: 1rem;
   background: none;
   color: #E0EAFC;
   border: none;
@@ -1008,7 +914,9 @@
   color: #E0EAFC;
 }
 
-.chat .silde-right .input .icon-send {
+.chat .silde-right .input button {
+  border: none;
+  background: none;
   padding: 0.4rem;
   margin: 0 1rem;
   color: #E0EAFC;
@@ -1016,29 +924,11 @@
   transition: all 0.6s ease-in-out;
 }
 
-.chat .silde-right .input .icon-send:hover {
-  scale: 1.2;
-  color: #ad5389;
-}
-
-.chat .silde-right .input button {
-  margin-left: 1rem;
-  padding: 0.6rem;
-  background: none;
-  color: #E0EAFC;
-  border: 2px solid #E0EAFC;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: all 0.6s ease-in-out;
-}
-
 .chat .silde-right .input button:hover {
-  border-color: #ad5389;
-  box-shadow: inset 0 0 1rem #ad5389;
+  scale: 1.2;
 }
 
 .chat .silde-right .warning {
-  margin-top: 0.4rem;
   text-align: center;
   color: #E0EAFC;
 }
@@ -1055,7 +945,7 @@
   width: 100%;
   height: 100vh;
   padding: 1rem;
-  background: radial-gradient(circle, #ad5389, #3c1053);
+  animation: bg 10s ease-in-out;
 }
 
 .chat .option-moblie .nav-menu {
@@ -1083,9 +973,6 @@
   height: 0.2rem;
   margin: 1rem 0;
   border-radius: 1rem;
-  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
-  background-attachment: fixed;
-  background-size: 500%;
 }
 
 .chat .option-moblie .history {
@@ -1253,8 +1140,8 @@
 }
 
 .toast .header .status {
-  width: 25px;
-  height: 25px;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
 }
 
@@ -1266,4 +1153,117 @@
 
 .toast .loader {
   height: 0.2rem;
+}
+
+/*Themes Style */
+.content .default:hover {
+  background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.content .GradeGrey:hover {
+  background: linear-gradient(45deg, #2c3e50, #bdc3c7, #2c3e50);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.content .PinkFlavour:hover {
+  background: linear-gradient(45deg, #800080, #ffc0cb, #800080);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.content .VisionsofGrandeur:hover {
+  background: linear-gradient(45deg, #000046, #1CB5E0, #000046);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.content .UltraVoilet:hover {
+  background: linear-gradient(45deg, #654ea3, #F0F2F0, #654ea3);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.content .TheBlueLagoon:hover {
+  background: linear-gradient(45deg, #43C6AC, #191654, #43C6AC);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.content .CalmDarya:hover {
+  background: linear-gradient(45deg, #5f2c82, #49a09d, #5f2c82);
+  background-attachment: fixed;
+  background-size: 500%;
+  overflow: hidden;
+  animation: bg 10s ease-in-out;
+}
+
+.register .default {
+  background-color: #3c1053;
+}
+
+.register .GradeGrey {
+  background-color: #2c3e50;
+}
+
+.register .PinkFlavour {
+  background-color: #800080;
+}
+
+.register .VisionsofGrandeur {
+  background-color: #000046;
+}
+
+.register .UltraVoilet {
+  background-color: #654ea3;
+}
+
+.register .TheBlueLagoon {
+  background-color: #43C6AC;
+}
+
+.register .CalmDarya {
+  background-color: #5f2c82;
+}
+
+.chat .default {
+  background-color: #3c1053;
+}
+
+.chat .GradeGrey {
+  background-color: #2c3e50;
+}
+
+.chat .PinkFlavour {
+  background-color: #800080;
+}
+
+.chat .VisionsofGrandeur {
+  background-color: #000046;
+}
+
+.chat .UltraVoilet {
+  background-color: #654ea3;
+}
+
+.chat .TheBlueLagoon {
+  background-color: #43C6AC;
+}
+
+.chat .CalmDarya {
+  background-color: #5f2c82;
 }

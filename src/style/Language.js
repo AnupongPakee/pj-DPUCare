@@ -37,6 +37,17 @@ const language = {
             "first_message": "สวัสดีค่ะ วันนี้เป็นยังไงบ้าง?",
             "setting": "การต้้งค่า",
             "exit": "ออก",
+            "question": "ป้อนคำถาม ?",
+            "welcome": "คุณเข้าสู่ระบบเรียบร้อยแล้ว ขอให้สนุกกับการใช้งาน 😊",
+            "typing": "กำลังพิมพ์...",
+            "limit": "คุณใช้สิทธิ์ทดลองใช้หมดแล้ว! กรุณาลงทะเบียนบัญชีหรือเข้าสู่ระบบ",
+            "chatbot": "แชทบอท",
+            "new_chat": "เพิ่มแชทใหม่",
+            "to_home": "กลับไปหน้าแรก",
+            "logout": "ออกจากระบบ",
+            "no_chat": "ไม่มีประวัติการแชท",
+            "dpu_care": "DPU Care อาจมีข้อผิดพลาด กรุณาตรวจสอบข้อมูลก่อนตัดสินใจ",
+            "chat_history": "ประวัติแชท",
             "not_support": "อุปกรณ์ไม่รองรับ",
             "warn": {
                 "wait": "กรุณารอสักคู่",
@@ -50,6 +61,7 @@ const language = {
                 "password": "รหัสตรวจสอบไม่ตรงกับรหัสผ่าน",
                 "user_found": "บัญชีนี้ไม่มีอยู่ในระบบ กรุณาตรวจสอบหรือสมัครสมาชิกใหม่",
                 "password_incorrect": "รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง",   
+                "require": "กรุณากรอกข้อมูลให้ครบถ้วน",
             }
         },
         "en": {
@@ -79,6 +91,17 @@ const language = {
             "first_message": "Hello, how are you today?",
             "setting": "Setting",
             "exit": "Exit",
+            "question": "Question ?",
+            "welcome": "You are logged in to use it 😊",
+            "typing": "Typing...",
+            "limit": "You have used up your trial! Please register an account or log in.",
+            "chatbot": "Chatbot",
+            "new_chat": "New Chat",
+            "to_home": "Return to home page",
+            "logout": "Logout",
+            "no_chat": "No chat history",
+            "dpu_care": "DPU Care may have errors, so please check the information before making a decision.",
+            "chat_history": "Chat history",
             "not_support": "The device is not supported.",
             "warn": {
                 "wait": "Please wait a moment",
@@ -92,6 +115,7 @@ const language = {
                 "password": "Verification code does not match password.",
                 "user_found": "This account does not exist. Please check or register again.",
                 "password_incorrect": "Password is incorrect. Please try again.",   
+                "require": "Please fill out the information completely.",
             }
         }
     }

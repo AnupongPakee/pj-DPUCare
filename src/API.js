@@ -30,5 +30,15 @@ export const get_history = async (id) => {
     return await axios.get(import.meta.env.VITE_API + "/history/" + id)
 }
 
+export const test_chatbot = async (data) =>
+    await axios.post(import.meta.env.VITE_API + "/history", data)
+
 export const create_report = async (data) =>
     await axios.post(import.meta.env.VITE_API + "/report", data)
+
+export const get_notification = async () => {
+    return await axios.get(import.meta.env.VITE_API + "/notifications")
+}
+
+export const del_notification = async (id) =>
+    await axios.delete(import.meta.env.VITE_API + "/notifications/" + id)

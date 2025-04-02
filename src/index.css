@@ -107,7 +107,7 @@ select:-webkit-autofill:focus {
         font-size: 1rem;
     }
 
-    .home .content .CoT h1 {
+    .home .content .profile h1 {
         transform: rotate(90deg);
     }
 
@@ -205,7 +205,7 @@ select:-webkit-autofill:focus {
         font-size: 1.2rem;
     }
 
-    .home .content .CoT h1 {
+    .home .content .profile h1 {
         transform: rotate(0);
     }
 
@@ -240,6 +240,10 @@ select:-webkit-autofill:focus {
 
     .chat .menu-moblie {
         display: none;
+    }
+
+    .register .new-profile form {
+        width: 40%;
     }
 
     .toast {

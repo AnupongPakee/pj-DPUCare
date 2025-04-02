@@ -10,10 +10,10 @@ function Register() {
   const [timestamp, setTimeStamp] = useState(new Date());
   const [user, setUser] = useState({})
   const [profile, setProfile] = useState({})
-  const [style, setStyle] = useState({ display: "none" })
-  const [platform, setPlatform] = useState("window")
+  const [style, setStyle] = useState(false)
+  const [platform, setPlatform] = useState(localStorage.getItem("platform") ? localStorage.getItem("platform") : "window")
   const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "th")
-  const [theme, setTheme] = useState("default")
+  const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "default")
   const [toast, setToast] = useState(
     {
       "show": false,
@@ -30,12 +30,10 @@ function Register() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (window.screen.width < 1280) {
-      setPlatform("phone")
-    }
     test_connect()
       .then((_) => {
         console.log("connect: success");
+        return;
       }).catch((err) => {
         console.log(err);
         setToast({
@@ -49,7 +47,16 @@ function Register() {
           "drive": platform,
           "theme": theme
         })
+        return;
       })
+    const btn = document.getElementById("btn")
+    const lb_sex = document.getElementById("h1-sex")
+    const lb_age = document.getElementById("h1-age")
+    const lb_job = document.getElementById("h1-job")
+    btn.className = `btn-rgs ${theme}`
+    lb_sex.className = `h1-sex ${theme}`
+    lb_age.className = `h1-age ${theme}`
+    lb_job.className = `h1-job ${theme}`
   }, [])
 
   const handleChange = (e) => {
@@ -74,8 +81,21 @@ function Register() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(user);
-    
+    if (!user || Object.keys(user).length === 0) {
+      setToast({
+        "show": true,
+        "status": "warn",
+        "text": LANGUAGES.language[language].warn.require,
+        "icon": false,
+        "font": language,
+        "flag": false,
+        "duration": 3000,
+        "drive": platform,
+        "theme": theme
+      })
+      handleTime(3500)
+      return;
+    }
     if (user.password_confirm != user.password) {
       setToast({
         "show": true,
@@ -89,6 +109,7 @@ function Register() {
         "theme": theme
       })
       handleTime(3500)
+      return;
     } else {
       register(user)
         .then((res) => {
@@ -111,7 +132,7 @@ function Register() {
               localStorage.setItem("section_id", res.data.section_id)
               new_message(res.data.section_id, { "question": "สวัสดี" })
                 .then((_) => {
-                  setStyle({ display: "flex" })
+                  setStyle(true)
                 }).catch((err) => {
                   console.log(err);
                   setToast({
@@ -135,6 +156,7 @@ function Register() {
                     }
                   })
                   handleTime(10500)
+                  return;
                 })
             }).catch((err) => {
               console.log(err);
@@ -159,6 +181,7 @@ function Register() {
                 }
               })
               handleTime(10500)
+              return;
             })
         })
         .catch((err) => {
@@ -176,6 +199,7 @@ function Register() {
               "theme": theme
             })
             handleTime(3500)
+            return;
           }
           else if (err.response.data.detail == "email already exists") {
             setToast({
@@ -190,6 +214,7 @@ function Register() {
               "theme": theme
             })
             handleTime(3500)
+            return;
           } else {
             setToast({
               "show": true,
@@ -212,6 +237,7 @@ function Register() {
               }
             })
             handleTime(10500)
+            return;
           }
         })
     }
@@ -245,6 +271,7 @@ function Register() {
           }
         })
         handleTime(10500)
+        return;
       })
   }
 
@@ -271,17 +298,16 @@ function Register() {
             <input type="email" name='email' style={LANGUAGES.font[language]} placeholder={LANGUAGES.language[language].email} onChange={(e) => handleChange(e)} /> <br />
             <input type="password" name='password' id='password' style={LANGUAGES.font[language]} placeholder={LANGUAGES.language[language].password} onChange={(e) => handleChange(e)} />
             <input type="password" name='password_confirm' style={LANGUAGES.font[language]} placeholder={LANGUAGES.language[language].password_confirm} onChange={(e) => handleChange(e)} /> <br />
-            <button type="submit">{LANGUAGES.language[language].create_account}</button>
+            <button id='btn' className='btn-rgs' type="submit">{LANGUAGES.language[language].create_account}</button>
           </form>
         </div>
-        <div className="right">
-        </div>
+        <img src="images/lgn_rgs.jpg" alt="images" />
       </div>
-      <div className="new-profile" style={style}>
+      <div className="new-profile" style={style ? THEMES[platform][theme].background : {display: "none"}}>
         <form onSubmit={handleSubmitProfile}>
           <h1 style={LANGUAGES.font[language]} className='header-profile'>{LANGUAGES.language[language].profile}</h1>
           <div className="label-sex">
-            <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].sex}</h1>
+            <h1 id='h1-sex' className='h1-sex' style={LANGUAGES.font[language]}>{LANGUAGES.language[language].sex}</h1>
             <div className="sex">
               <label htmlFor="manId" id='manLabel' style={LANGUAGES.font[language]} onClick={() => showBorderStyle("man")}>{LANGUAGES.language[language].man}</label>
               <input type="radio" id="manId" name="sex" value={"man"} onChange={(e) => handleChangeProfile(e)} />
@@ -290,11 +316,11 @@ function Register() {
             </div>
           </div>
           <div className="label-age">
-            <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].age}</h1>
+            <h1 id='h1-age' className='h1-age' style={LANGUAGES.font[language]}>{LANGUAGES.language[language].age}</h1>
             <input type="number" min={1} name="age" style={LANGUAGES.font[language]} placeholder={LANGUAGES.language[language].number} onChange={(e) => handleChangeProfile(e)} />
           </div>
           <div className="label-job">
-            <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].occupation}</h1>
+            <h1 id='h1-job' className='h1-job' style={LANGUAGES.font[language]}>{LANGUAGES.language[language].occupation}</h1>
             <select name="job" className='job' defaultValue={"non"} onChange={(e) => handleChangeProfile(e)}>
               <option value="non">{LANGUAGES.language[language].please_select}</option>
               <option value="student">{LANGUAGES.language[language].occupations.student}</option>

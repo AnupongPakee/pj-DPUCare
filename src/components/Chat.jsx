@@ -3,15 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faRightToBracket, faTrash, faMessage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from "react-router-dom"
 
-import STYLE from "../style/Style"
-import THEMES from "../style/Themes"
-import { 
-  get_history, 
+import {
+  get_history,
   get_section,
   new_section,
-  del_section, 
+  del_section,
   new_message,
-  test_connect } from "../API"
+  test_connect
+} from "../API"
+import THEMES from "../style/Themes"
+import LANGUAGES from "../style/Language"
 import Toast from './Toast'
 
 function Chat() {
@@ -19,27 +20,58 @@ function Chat() {
   const [firstMessage, setFirstMessage] = useState({})
   const [message, setMessage] = useState([])
   const [section, setSection] = useState([])
-  const [toast, setToast] = useState({ "show": "false", "theme": "default" })
+  const [platform, setPlatform] = useState(localStorage.getItem("platform") ? localStorage.getItem("platform") : "window")
+  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "th")
+  const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "default")
+  const [toast, setToast] = useState(
+    {
+      "show": false,
+      "status": "warn",
+      "text": LANGUAGES.language[language].warn.wait,
+      "icon": false,
+      "font": language,
+      "flag": false,
+      "duration": 3000,
+      "drive": platform,
+      "theme": theme,
+      "report": ""
+    })
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
 
   const user_id = localStorage.getItem("id")
-  const section_id = localStorage.getItem("section")
+  const section_id = localStorage.getItem("section_id")
 
   useEffect(() => {
     test_connect()
-      .then((_) => {
-        console.log("connect: success");
-      }).catch((err) => {
-        console.log(err);
-        setToast({
-          "show": "true",
-          "status": "mistake",
-          "text": "ติดต่อกับฝั่งเซิฟร์เวอร์ไม่สำเร็จ",
-          "theme": "default",
-          "duration": 3000
-        })
+    .then((_) => {
+      console.log("connect: success");
+      return;
+    }).catch((err) => {
+      console.log(err);
+      setToast({
+        "show": true,
+        "status": "mistake",
+        "text": LANGUAGES.language[language].warn.error_connect,
+        "icon": true,
+        "font": language,
+        "flag": false,
+        "duration": 3000,
+        "drive": platform,
+        "theme": theme
       })
+      return;
+    })
+    const line = document.getElementById("line")
+    const line2 = document.getElementById("line2")
+    const line3 = document.getElementById("line3")
+    const line4 = document.getElementById("line4")
+    const resizer = document.getElementById("resizer")
+    line.className = `line ${theme}`
+    line2.className = `line ${theme}`
+    line3.className = `line ${theme}`
+    line4.className = `line ${theme}`
+    resizer.className = `resizer ${theme}`
     getHistory()
     getSection()
   }, [])
@@ -64,7 +96,32 @@ function Chat() {
       .then((res) => {
         setFirstMessage(res.data.firstChat)
         setMessage(res.data.secondChatAll)
-      }).catch((err) => console.log(err))
+        return;
+      }).catch((err) => {
+        console.log(err)
+        setToast({
+          "show": true,
+          "status": "warn",
+          "text": LANGUAGES.language[language].warn.error,
+          "icon": true,
+          "font": language,
+          "flag": true,
+          "duration": 10000,
+          "drive": platform,
+          "theme": theme,
+          "report": {
+            timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
+            issue_type: "server",
+            user_id: "non-user",
+            title: "get_history [chat.jsx]",
+            description: err.message,
+            severity: "medium",
+            status: "wait",
+          }
+        })
+        handleTime(10500)
+        return;
+      })
   }
 
   const getSection = async () => {
@@ -75,43 +132,141 @@ function Chat() {
           non_history.style.display = "flex";
         } else {
           non_history.style.display = "none";
-          if (localStorage.getItem("section") == null) {
-            localStorage.setItem("section", res.data[0].id)
+          if (localStorage.getItem("section_id") == undefined) {
+            localStorage.setItem("section_id", res.data[0].section_id)
             location.reload()
           }
           setSection(res.data)
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        setToast({
+          "show": true,
+          "status": "warn",
+          "text": LANGUAGES.language[language].warn.error,
+          "icon": true,
+          "font": language,
+          "flag": true,
+          "duration": 10000,
+          "drive": platform,
+          "theme": theme,
+          "report": {
+            timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
+            issue_type: "server",
+            user_id: "non-user",
+            title: "get_section [chat.jsx]",
+            description: err.message,
+            severity: "medium",
+            status: "wait",
+          }
+        })
+        handleTime(10500)
+        return;
+      })
   }
 
   const newSection = async () => {
     new_section(user_id)
       .then(async (res) => {
         getSection()
-        localStorage.setItem("section", res.data.id)
-        await axios.post(URL + "/history/" + res.data.id, { "question": "สวัสดี" })
+        localStorage.setItem("section_id", res.data.section_id)
+        new_message(res.data.section_id, { "question": "สวัสดี" })
           .then((_) => {
             getHistory()
             location.reload()
+            return;
           })
-          .catch((err) => console.log(err))
+          .catch((err) => {
+            console.log(err)
+            setToast({
+              "show": true,
+              "status": "mistake",
+              "text": LANGUAGES.language[language].warn.error,
+              "icon": true,
+              "font": language,
+              "flag": true,
+              "duration": 10000,
+              "drive": platform,
+              "theme": theme,
+              "report": {
+                timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
+                issue_type: "server",
+                user_id: "non-user",
+                title: "new_message [chat.jsx]",
+                description: err.message,
+                severity: "hight",
+                status: "wait",
+              }
+            })
+            handleTime(10500)
+            return;
+          })
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        setToast({
+          "show": true,
+          "status": "warn",
+          "text": LANGUAGES.language[language].warn.error,
+          "icon": true,
+          "font": language,
+          "flag": true,
+          "duration": 10000,
+          "drive": platform,
+          "theme": theme,
+          "report": {
+            timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
+            issue_type: "server",
+            user_id: "non-user",
+            title: "new_section [chat.jsx]",
+            description: err.message,
+            severity: "hight",
+            status: "wait",
+          }
+        })
+        handleTime(10500)
+        return;
+      })
   }
 
   const deleteSection = async id => {
-    localStorage.removeItem("section")
+    localStorage.removeItem("section_id")
     del_section(id)
       .then((_) => {
         getSection()
         getHistory()
+        return;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        setToast({
+          "show": true,
+          "status": "mistake",
+          "text": LANGUAGES.language[language].warn.error,
+          "icon": true,
+          "font": language,
+          "flag": true,
+          "duration": 10000,
+          "drive": platform,
+          "theme": theme,
+          "report": {
+            timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
+            issue_type: "server",
+            user_id: "non-user",
+            title: "del_section [chat.jsx]",
+            description: err.message,
+            severity: "hight",
+            status: "wait",
+          }
+        })
+        handleTime(10500)
+        return;
+      })
   }
 
   const selectSection = (id) => {
-    localStorage.setItem("section", id)
+    localStorage.setItem("section_id", id)
     location.reload()
   }
 
@@ -121,12 +276,39 @@ function Chat() {
     text.value = "";
     const rawMessage = {
       question: form.question,
-      answer: "กำลังพิมพ์..."
+      answer: LANGUAGES.language[language].typing
     }
     setMessage([...message, rawMessage])
     new_message(section_id, form)
-      .then((_) => getHistory())
-      .catch((err) => console.log(err))
+      .then((_) => {
+        getHistory()
+        return;
+      })
+      .catch((err) => {
+        console.log(err)
+        setToast({
+          "show": true,
+          "status": "mistake",
+          "text": LANGUAGES.language[language].warn.error,
+          "icon": true,
+          "font": language,
+          "flag": true,
+          "duration": 10000,
+          "drive": platform,
+          "theme": theme,
+          "report": {
+            timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
+            issue_type: "server",
+            user_id: "non-user",
+            title: "main new_message [chat.jsx]",
+            description: err.message,
+            severity: "hight",
+            status: "wait",
+          }
+        })
+        handleTime(10500)
+        return;
+      })
   }
 
   const logout = () => {
@@ -168,27 +350,27 @@ function Chat() {
     }
   }
   return (
-    <div className='container chat' style={THEMES.default.background}>
+    <div className='container chat' style={THEMES[platform][theme].background}>
       <div className="content">
         <div className="silde-left" id='slide-left'>
-          <button style={STYLE.font_family.th} onClick={() => newSection()}>เพิ่มแชทใหม่</button>
-          <div className="line"></div>
+          <button style={LANGUAGES.font[language]} onClick={() => newSection()}>{LANGUAGES.language[language].new_chat}</button>
+          <div className="line" id='line'></div>
           <div className="history">
             {
               section.map((item, idx) => {
                 return (
                   <div className="name-icon" key={idx}>
-                    <p style={STYLE.font_family.th} onClick={() => selectSection(item.id)}>{item.name}</p>
-                    <FontAwesomeIcon icon={faTrash} className='icon-delete' onClick={() => deleteSection(item.id)} />
+                    <p style={LANGUAGES.font[language]} onClick={() => selectSection(item.section_id)}>{item.time}</p>
+                    <FontAwesomeIcon icon={faTrash} className='icon-delete' onClick={() => deleteSection(item.section_id)} />
                   </div>
                 )
               })
             }
           </div>
-          <div className="line"></div>
+          <div className="line" id='line2'></div>
           <div className="mini-menu">
-            <FontAwesomeIcon icon={faHome} className='icon-mini' title='กลับไปหน้าแรก' onClick={() => navigate("/pj-DPUCare")} />
-            <FontAwesomeIcon icon={faRightToBracket} className='icon-mini' title='ออกจากระบบ' onClick={() => logout()} />
+            <FontAwesomeIcon icon={faHome} className='icon-mini' title={LANGUAGES.language[language].to_home} onClick={() => navigate("/pj-DPUCare")} />
+            <FontAwesomeIcon icon={faRightToBracket} className='icon-mini' title={LANGUAGES.language[language].logout} onClick={() => logout()} />
           </div>
         </div>
         <div className="menu-moblie">
@@ -198,9 +380,9 @@ function Chat() {
           <FontAwesomeIcon icon={faRightToBracket} className='icon-moblie' onClick={() => logout()} />
         </div>
         <div className="silde-right">
-          <div className="resizer" onClick={() => showSlideLeft(true)}></div>
+          <div className="resizer" id='resizer' onClick={() => showSlideLeft(true)}></div>
           <div className="non-history" id='non-history'>
-            <h1 style={STYLE.font_family.th}>ไม่มีประวัติการแชท</h1>
+            <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].no_chat}</h1>
           </div>
           <div className="show-message">
             <div className="st-message">
@@ -224,40 +406,41 @@ function Chat() {
           </div>
           <div className="input">
             <form onSubmit={handleSubmit}>
-              <input type="text" name='question' id='question' placeholder='ป้อนคำถาม ?' style={STYLE.font_family.th} onChange={(e) => handleChanage(e)} />
-              <FontAwesomeIcon icon={faPaperPlane} className='icon-send' />
+              <input type="text" name='question' id='question' placeholder={LANGUAGES.language[language].question} style={LANGUAGES.font[language]} onChange={(e) => handleChanage(e)} />
+              <button type="submit">
+                <FontAwesomeIcon icon={faPaperPlane} className='icon-send' />
+              </button>
             </form>
-            <button style={STYLE.font_family.th}>ประเมิน</button>
           </div>
           <div className="warning">
-            <p style={STYLE.font_family.th}>DPU Care อาจทำผิดพลาดได้ ดังนั้นโปรดตรวจสอบคำตอบอีกครั้ง</p>
+            <p style={LANGUAGES.font[language]}>{LANGUAGES.language[language].dpu_care}</p>
           </div>
         </div>
       </div>
       <div className="option-moblie" id='option-moblie'>
         <div className="nav-menu">
-          <h1 style={STYLE.font_family.th}>ประวัติแชท</h1>
+          <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].chat_history}</h1>
           <FontAwesomeIcon icon={faRightToBracket} className='icon-exit' onClick={() => showOption(true)} />
         </div>
-        <div className="line"></div>
+        <div className="line" id='line3'></div>
         <div className="history">
           {
             section.map((item, idx) => {
               return (
                 <div className="name-icon" key={idx}>
-                  <p style={STYLE.font_family.th} onClick={() => selectSection(item.id)}>{item.name}</p>
-                  <FontAwesomeIcon icon={faTrash} className='icon-delete' onClick={() => deleteSection(item.id)} />
+                  <p style={LANGUAGES.font[language]} onClick={() => selectSection(item.section_id)}>{item.time}</p>
+                  <FontAwesomeIcon icon={faTrash} className='icon-delete' onClick={() => deleteSection(item.section_id)} />
                 </div>
               )
             })
           }
         </div>
-        <div className="line"></div>
+        <div className="line" id='line4'></div>
       </div>
       <div className="not-support">
-        <h1 style={STYLE.font_family.en}>Not Support</h1>
+        <h1 style={LANGUAGES.font[language]}>{LANGUAGES.language[language].not_support}</h1>
       </div>
-      <Toast data={toast}/>
+      <Toast data={toast} />
     </div>
   )
 }
