@@ -130,6 +130,7 @@ function Chat() {
       .then((res) => {
         if (res.data.length == 0) {
           non_history.style.display = "flex";
+          return;
         } else {
           non_history.style.display = "none";
           if (localStorage.getItem("section_id") == undefined) {
@@ -137,6 +138,7 @@ function Chat() {
             location.reload()
           }
           setSection(res.data)
+          return;
         }
       })
       .catch((err) => {
@@ -268,6 +270,7 @@ function Chat() {
   const selectSection = (id) => {
     localStorage.setItem("section_id", id)
     location.reload()
+    return;
   }
 
   const handleSubmit = async e => {
@@ -326,10 +329,12 @@ function Chat() {
 
     if (state == 1) {
       slide_left.style.display = "none"
+      return;
     }
     else if (state == 2) {
       slide_left.style.display = "block"
-      state = 0
+      state = 0;
+      return;
     }
   }
 
@@ -342,11 +347,13 @@ function Chat() {
 
     if (state_2 == 1) {
       option_moblie.style.display = "block"
+      return;
     }
 
     else if (state_2 == 2) {
       option_moblie.style.display = "none"
       state_2 = 0
+      return;
     }
   }
   return (

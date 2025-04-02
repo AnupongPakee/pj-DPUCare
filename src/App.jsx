@@ -17,7 +17,7 @@ function App() {
   const [messageDb, setMessageDb] = useState([])
   const [setting, setSetting] = useState({ display: "none" })
   const [platform, setPlatform] = useState(localStorage.getItem("platform") ? localStorage.getItem("platform") : "window")
-  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "th")
+  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "en")
   const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "default")
   const [stateLanguage, setStateLanguage] = useState(0);
   const [stateTheme, setStateTheme] = useState(0);
