@@ -90,6 +90,20 @@ select:-webkit-autofill:focus {
         align-content: center;
     }
 
+    .home .content .chat-home .mini-icon {
+        display: block;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .home .content .chat-home .icon-full {
+        display: none;
+    }
+
+    .home .content .chat-home .icon-language {
+        margin-bottom: 1rem;
+    }
+
     .home .content .chat-home .show-message,
     .home .content .chat-home form {
         display: none;
@@ -113,6 +127,18 @@ select:-webkit-autofill:focus {
 
     .home .content .setting {
         font-size: 0.8rem;
+    }
+
+    .home .show-setting .label-theme {
+        width: 100%;
+    }
+
+    .home .show-setting .label-language {
+        width: 100%;
+    }
+
+    .home .show-setting .btn-2 {
+        width: 100%;
     }
 
     .home .content .exit {
@@ -197,6 +223,19 @@ select:-webkit-autofill:focus {
         display: flex;
     }
 
+    .home .content .chat-home .mini-icon {
+        display: flex;
+    }
+
+    .home .content .chat-home .icon-full {
+        display: block;
+    }
+
+    .home .content .chat-home .icon-language {
+        margin-bottom: 0;
+        margin-right: 1rem;
+    }
+
     .home .content .date-time h1 {
         font-size: 1.6rem;
     }
@@ -211,6 +250,18 @@ select:-webkit-autofill:focus {
 
     .home .content .setting {
         font-size: 1rem;
+    }
+
+    .home .show-setting .label-theme {
+        width: 30%;
+    }
+
+    .home .show-setting .label-language {
+        width: 30%;
+    }
+
+    .home .show-setting .btn-2 {
+        width: 30%;
     }
 
     .home .content .exit {

@@ -19,7 +19,7 @@ function App() {
   const [setting, setSetting] = useState({ display: "none" })
   const [style, setStyle] = useState(false)
   const [platform, setPlatform] = useState(localStorage.getItem("platform") ? localStorage.getItem("platform") : "window")
-  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "en")
+  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "th")
   const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "default")
   const [stateLanguage, setStateLanguage] = useState(0);
   const [stateTheme, setStateTheme] = useState(0);
@@ -491,7 +491,7 @@ function App() {
       } else if (check == "exit") {
         localStorage.removeItem("id")
         localStorage.removeItem("section_id")
-        localStorage.removeItem("sucess")
+        localStorage.removeItem("status")
         location.reload()
       } else if (check == "profile") {
         setStyle(true);
@@ -652,12 +652,12 @@ function App() {
         </div>
         <div className="chat-home">
           <h1 style={LANGUAGES.font[language]} onClick={() => nextPage("chat")}>{LANGUAGES.language[language].chatbot}</h1>
+          <div className="mini-icon">
+            <h2 className='icon-language' style={LANGUAGES.font[language]} onClick={() => changeLanguage(true)} >{language}</h2>
+            <FontAwesomeIcon icon={faThermometer} className='icon-theme' onClick={() => changeTheme(true)} />
+            <FontAwesomeIcon icon={faExpand} className='icon-full' id='icon-full' onClick={() => nextPage("chat")} />
+          </div>
           <div className="show-message">
-            <div className="mini-icon">
-              <h2 className='icon-language' style={LANGUAGES.font[language]} onClick={() => changeLanguage(true)} >{language}</h2>
-              <FontAwesomeIcon icon={faThermometer} className='icon-theme' onClick={() => changeTheme(true)} />
-              <FontAwesomeIcon icon={faExpand} className='icon-full' id='icon-full' onClick={() => nextPage("chat")} />
-            </div>
             <div className='ai'>
               <p className='ai-message' id='first-ai' style={LANGUAGES.font[language]}>{(status == "sucess" && user_id != null) ? firstMessage.answer : LANGUAGES.language[language].first_message}</p>
             </div>

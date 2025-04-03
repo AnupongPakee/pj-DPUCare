@@ -40,7 +40,7 @@ function Admin() {
         <div className="data">
           <h1 style={LANGUAGES.font[language]}>data</h1>
         </div>
-        <div className="chat">
+        <div className="chat-admin">
           <form action="">
             <input type="text" placeholder='ป้อนคำคาม' />
           </form>
@@ -57,7 +57,7 @@ function Admin() {
           <h3 style={LANGUAGES.font[language]}>40,5000 token</h3>
         </div>
         <div className="test">
-          <h1 style={LANGUAGES.font[language]}>test system</h1>
+          <h1 style={LANGUAGES.font[language]}>report</h1>
         </div>
         <div className="exit" style={LANGUAGES.font[language]}>
           exit

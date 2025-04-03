@@ -120,11 +120,11 @@ function Register() {
             "icon": false,
             "font": language,
             "flag": false,
-            "duration": 3000,
+            "duration": 5000,
             "drive": platform,
             "theme": theme
           })
-          handleTime(3500)
+          handleTime(5500)
           localStorage.setItem("id", res.data.id)
           localStorage.setItem("status", "sucess")
           new_section(res.data.id)

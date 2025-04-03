@@ -61,13 +61,11 @@
 
 .home .content .chat-home .mini-icon {
   position: absolute;
-  right: 1rem;
-  display: flex;
-  justify-content: right;
-  align-items: center;
+  text-align: center;
 }
 
 .home .content .chat-home .icon-full {
+  margin-left: 1rem;
   color: #E0EAFC;
   cursor: pointer;
   transition: all 0.6s ease-in-out;
@@ -78,7 +76,6 @@
 }
 
 .home .content .chat-home .icon-theme {
-  margin-right: 1rem;
   color: #E0EAFC;
   cursor: pointer;
   transition: all 0.6s ease-in-out;
@@ -91,7 +88,6 @@
 .home .content .chat-home .icon-language {
   text-transform: uppercase;
   line-height: 100%;
-  margin-right: 1rem;
   color: #E0EAFC;
   cursor: pointer;
   transition: all 0.6s ease-in-out;
@@ -254,7 +250,6 @@
 .home .show-setting .label-theme {
   display: flex;
   align-items: center;
-  width: 30%;
   height: 10%;
   text-align: center;
   margin-bottom: 1.6rem;
@@ -280,87 +275,9 @@
   overflow-x: hidden;
 }
 
-.home .show-setting .theme-default {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #ad5389, #3c1053);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
-.home .show-setting .theme-GradeGrey {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #2c3e50, #bdc3c7);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
-.home .show-setting .theme-PinkFlavour {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #800080, #ffc0cb);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
-.home .show-setting .theme-VisionsofGrandeur {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #000046, #1CB5E0);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
-.home .show-setting .theme-UltraVoilet {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #654ea3, #eaafc8);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
-.home .show-setting .theme-TheBlueLagoon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #191654, #43C6AC);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
-.home .show-setting .theme-CalmDarya {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #5f2c82, #49a09d);
-  color: #E0EAFC;
-  cursor: pointer;
-}
-
 .home .show-setting .label-language {
   display: flex;
   align-items: center;
-  width: 30%;
   height: 10%;
   text-align: center;
   margin-bottom: 1.6rem;
@@ -394,7 +311,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
@@ -402,7 +319,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 30%;
 }
 
 .home .show-setting .btn-2 button {
@@ -1261,6 +1177,8 @@
 .admin .content {
   display: grid;
   gap: 1rem;
+  grid-template-columns: auto auto 30% 40%;
+  /* Edit Css */
   width: 100%;
   height: 100%;
 }
@@ -1268,7 +1186,6 @@
 .admin .date-time {
   align-content: center;
   grid-column: 1 / span 2;
-  padding: 1rem;
   background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
@@ -1277,16 +1194,14 @@
 .admin .data {
   grid-column: 3;
   grid-row: 1 / span 2;
-  padding: 1rem;
   background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
 }
 
-.admin .chat {
+.admin .chat-admin {
   grid-column: 4;
   grid-row: 1 / span 3;
-  padding: 1rem;
   background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
   overflow: hidden;
@@ -1385,6 +1300,83 @@
 }
 
 /*Themes Style */
+.home .show-setting .theme-default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #ad5389, #3c1053);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
+.home .show-setting .theme-GradeGrey {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #2c3e50, #bdc3c7);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
+.home .show-setting .theme-PinkFlavour {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #800080, #ffc0cb);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
+.home .show-setting .theme-VisionsofGrandeur {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #000046, #1CB5E0);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
+.home .show-setting .theme-UltraVoilet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #654ea3, #eaafc8);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
+.home .show-setting .theme-TheBlueLagoon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #191654, #43C6AC);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
+.home .show-setting .theme-CalmDarya {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #5f2c82, #49a09d);
+  color: #E0EAFC;
+  cursor: pointer;
+}
+
 .content .default:hover {
   background: linear-gradient(45deg, #3c1053, #ad5389, #3c1053);
   background-attachment: fixed;
