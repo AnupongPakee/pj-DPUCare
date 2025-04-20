@@ -40,9 +40,24 @@ export const test_chatbot = async (data) =>
 export const create_report = async (data) =>
     await axios.post(import.meta.env.VITE_API + "/report", data)
 
+export const get_report = async () => {
+    return await axios.get(import.meta.env.VITE_API + "/report")
+}
+
+export const create_notification = async (data) => {
+    await axios.post(import.meta.env.VITE_API + "/notifications", data)
+}
+
 export const get_notification = async () => {
     return await axios.get(import.meta.env.VITE_API + "/notifications")
 }
 
 export const del_notification = async (id) =>
     await axios.delete(import.meta.env.VITE_API + "/notifications/" + id)
+
+export const get_information = async (id) => {
+    return await axios.get(import.meta.env.VITE_API + "/information/" + id)
+}
+
+export const new_information = async (id, data) =>
+    await axios.put(import.meta.env.VITE_API + "/information/" + id, data)

@@ -41,6 +41,7 @@ function App() {
     age: "",
     job: ""
   })
+  
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
   const currentDate = new Date()
@@ -48,6 +49,12 @@ function App() {
   const status = localStorage.getItem("status")
   const user_id = localStorage.getItem("id")
   const section_id = localStorage.getItem("section_id")
+
+  const handleTime = (second) => {
+    setTimeout(() => {
+      setToast({ "show": false, "drive": platform, "theme": theme })
+    }, second);
+  }
 
   useEffect(() => {
     if (window.screen.width < 1280) {
@@ -58,6 +65,90 @@ function App() {
     test_connect()
       .then((_) => {
         console.log("connect: success");
+        if (status == "sucess" && user_id != null) {
+          getProfile()
+          getSection()
+          getHistory()
+          return;
+        }
+        get_notification()
+          .then((res) => {
+            if (res.data.length > 0) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {                
+                setToast({
+                  "show": true,
+                  "status": "admin",
+                  "text": (language == "en" ? res.data[0].notification_en : res.data[0].notification_th),
+                  "icon": false,
+                  "font": language,
+                  "flag": false,
+                  "duration": 5000,
+                  "drive": platform,
+                  "theme": theme
+                })
+                handleTime(5500)
+                return;
+              } else {
+                del_notification(res.data[0].id)
+                  .then((_) => {
+                    return;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setToast({
+                      "show": true,
+                      "status": "mistake",
+                      "text": LANGUAGES.language[language].warn.error,
+                      "icon": true,
+                      "font": language,
+                      "flag": true,
+                      "duration": 10000,
+                      "drive": platform,
+                      "theme": theme,
+                      "report": {
+                        timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                        issue_type: err.code,
+                        user_id: `${user_id}`,
+                        title: "del_notification [DELETE][App]",
+                        description: err.message,
+                        severity: "medium",
+                        status: "wait",
+                      }
+                    })
+                    handleTime(10500)
+                    return;
+                  })
+              }
+            }
+            else {
+              return;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setToast({
+              "show": true,
+              "status": "mistake",
+              "text": LANGUAGES.language[language].warn.error,
+              "icon": true,
+              "font": language,
+              "flag": true,
+              "duration": 10000,
+              "drive": platform,
+              "theme": theme,
+              "report": {
+                timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                issue_type: err.code,
+                user_id: `${user_id}`,
+                title: "get_notification [GET][App]",
+                description: err.message,
+                severity: "medium",
+                status: "wait",
+              }
+            })
+            handleTime(10500)
+            return;
+          })
         return;
       }).catch((err) => {
         console.log(err);
@@ -74,91 +165,7 @@ function App() {
         })
         return;
       })
-    if (status == "sucess" && user_id != null) {
-      getProfile()
-      getSection()
-      getHistory()
-      return;
-    }
     setInterval(() => setTime(new Date()), 1000)
-    get_notification()
-      .then((res) => {
-        if (res.data.length > 0) {
-          if (`${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}` != res.data[0].timestamp) {
-            setToast({
-              "show": true,
-              "status": "admin",
-              "text": (language == "en" ? res.data[0].notification_en : res.data[0].notification_th),
-              "icon": false,
-              "font": language,
-              "flag": false,
-              "duration": 5000,
-              "drive": platform,
-              "theme": theme
-            })
-            handleTime(5500)
-            return;
-          } else {
-            del_notification(res.data[0].id)
-              .then((_) => {
-                return;
-              })
-              .catch((err) => {
-                console.log(err);
-                setToast({
-                  "show": true,
-                  "status": "mistake",
-                  "text": LANGUAGES.language[language].warn.error,
-                  "icon": true,
-                  "font": language,
-                  "flag": true,
-                  "duration": 10000,
-                  "drive": platform,
-                  "theme": theme,
-                  "report": {
-                    timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                    issue_type: "server",
-                    user_id: "non-user",
-                    title: "del_notification",
-                    description: err.message,
-                    severity: "medium",
-                    status: "wait",
-                  }
-                })
-                handleTime(10500)
-                return;
-              })
-          }
-        }
-        else {
-          return;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setToast({
-          "show": true,
-          "status": "mistake",
-          "text": LANGUAGES.language[language].warn.error,
-          "icon": true,
-          "font": language,
-          "flag": true,
-          "duration": 10000,
-          "drive": platform,
-          "theme": theme,
-          "report": {
-            timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "get_notification",
-            description: err.message,
-            severity: "medium",
-            status: "wait",
-          }
-        })
-        handleTime(10500)
-        return;
-      })
   }, [])
 
   useEffect(() => {
@@ -206,12 +213,6 @@ function App() {
     })
   }
 
-  const handleTime = (second) => {
-    setTimeout(() => {
-      setToast({ "show": false, "drive": platform, "theme": theme })
-    }, second);
-  }
-
   const scrollToBottom = () => messageEndRef.current?.scrollIntoView({ behavior: 'smooth' })
 
   const getHistory = async () => {
@@ -219,6 +220,7 @@ function App() {
       .then((res) => {
         setFirstMessage(res.data.firstChat)
         setMessageDb(res.data.secondChatAll)
+        return;
       }).catch((err) => {
         console.log(err);
         setToast({
@@ -233,9 +235,9 @@ function App() {
           "theme": theme,
           "report": {
             timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "get_history",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "get_history [GET][App]",
             description: err.message,
             severity: "medium",
             status: "wait",
@@ -253,8 +255,28 @@ function App() {
         return;
       })
       .catch((err) => {
-        console.log(err);
-        return
+        setToast({
+          "show": true,
+          "status": "mistake",
+          "text": LANGUAGES.language[language].warn.error,
+          "icon": true,
+          "font": language,
+          "flag": true,
+          "duration": 10000,
+          "drive": platform,
+          "theme": theme,
+          "report": {
+            timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "get_profile [GET][App]",
+            description: err.message,
+            severity: "medium",
+            status: "wait",
+          }
+        })
+        handleTime(10500)
+        return;
       })
   }
 
@@ -274,7 +296,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-
         setToast({
           "show": true,
           "status": "warn",
@@ -287,9 +308,9 @@ function App() {
           "theme": theme,
           "report": {
             timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: user_id,
-            title: "get_section",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "get_section [GET][App]",
             description: err.message,
             severity: "medium",
             status: "wait",
@@ -333,9 +354,9 @@ function App() {
                   "theme": theme,
                   "report": {
                     timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                    issue_type: "server",
-                    user_id: "non-user",
-                    title: "new_message",
+                    issue_type: err.code,
+                    user_id: `${user_id}`,
+                    title: "new_message [POST][App]",
                     description: err.message,
                     severity: "higth",
                     status: "wait",
@@ -359,9 +380,9 @@ function App() {
               "theme": theme,
               "report": {
                 timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                issue_type: "server",
-                user_id: "non-user",
-                title: "new_section",
+                issue_type: err.code,
+                user_id: `${user_id}`,
+                title: "new_section [POST][App]",
                 description: err.message,
                 severity: "higth",
                 status: "wait",
@@ -375,6 +396,7 @@ function App() {
         .then((_) => {
           scrollToBottom()
           getHistory()
+          return;
         })
         .catch((err) => {
           console.log(err)
@@ -390,9 +412,9 @@ function App() {
             "theme": theme,
             "report": {
               timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-              issue_type: "server",
-              user_id: "non-user",
-              title: "new_message",
+              issue_type: err.code,
+              user_id: `${user_id}`,
+              title: "new_message [POST][App]",
               description: err.message,
               severity: "hight",
               status: "wait",
@@ -419,6 +441,7 @@ function App() {
               answer: res.data.answer
             }])
             scrollToBottom()
+            return;
           })
           .catch((err) => {
             console.log(err)
@@ -434,9 +457,9 @@ function App() {
               "theme": theme,
               "report": {
                 timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                issue_type: "server",
-                user_id: "non-user",
-                title: "test_chatbot",
+                issue_type: err.code,
+                user_id: `${user_id}`,
+                title: "test_chatbot [POST][App]",
                 description: err.message,
                 severity: "hight",
                 status: "wait",
@@ -469,11 +492,11 @@ function App() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "new_profile",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "new_profile [POST][App]",
             description: err.message,
-            severity: "hight",
+            severity: "medium",
             status: "wait",
           }
         })

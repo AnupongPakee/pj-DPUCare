@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-import { login, get_section, test_connect } from "../API"
+import { login, get_section, get_notification, new_section, new_message, del_notification, test_connect } from "../API"
 import THEMES from "../style/Themes"
 import LANGUAGES from "../style/Language"
 import Toast from './Toast'
@@ -26,11 +26,100 @@ function Login() {
       "report": ""
     })
   const navigate = useNavigate()
+  const currentDate = new Date()
+
+  const user_id = localStorage.getItem("id")
+
+  const handleTime = (second) => {
+    setTimeout(() => {
+      setToast({ "show": false, "drive": platform, "theme": theme })
+    }, second);
+  }
 
   useEffect(() => {
+    const btn = document.getElementById("btn")
+    btn.className = `btn-login ${theme}`
     test_connect()
       .then((_) => {
         console.log("connect: success");
+        get_notification()
+          .then((res) => {
+            if (res.data.length > 0) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {
+                setToast({
+                  "show": true,
+                  "status": "admin",
+                  "text": (language == "en" ? res.data[0].notification_en : res.data[0].notification_th),
+                  "icon": false,
+                  "font": language,
+                  "flag": false,
+                  "duration": 5000,
+                  "drive": platform,
+                  "theme": theme
+                })
+                handleTime(5500)
+                return;
+              } else {
+                del_notification(res.data[0].id)
+                  .then((_) => {
+                    return;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setToast({
+                      "show": true,
+                      "status": "mistake",
+                      "text": LANGUAGES.language[language].warn.error,
+                      "icon": true,
+                      "font": language,
+                      "flag": true,
+                      "duration": 10000,
+                      "drive": platform,
+                      "theme": theme,
+                      "report": {
+                        timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                        issue_type: err.code,
+                        user_id: "null",
+                        title: "del_notification [DELETE][Login]",
+                        description: err.message,
+                        severity: "medium",
+                        status: "wait",
+                      }
+                    })
+                    handleTime(10500)
+                    return;
+                  })
+              }
+            }
+            else {
+              return;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setToast({
+              "show": true,
+              "status": "mistake",
+              "text": LANGUAGES.language[language].warn.error,
+              "icon": true,
+              "font": language,
+              "flag": true,
+              "duration": 10000,
+              "drive": platform,
+              "theme": theme,
+              "report": {
+                timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                issue_type: err.code,
+                user_id: "null",
+                title: "get_notification [GET][Login]",
+                description: err.message,
+                severity: "medium",
+                status: "wait",
+              }
+            })
+            handleTime(10500)
+            return;
+          })
         return;
       }).catch((err) => {
         console.log(err);
@@ -47,8 +136,6 @@ function Login() {
         })
         return;
       })
-    const btn = document.getElementById("btn")
-    btn.className = `btn-login ${theme}`
   }, [])
 
   const handleChange = e => {
@@ -56,12 +143,6 @@ function Login() {
       ...form,
       [e.target.name]: e.target.value
     })
-  }
-
-  const handleTime = (second) => {
-    setTimeout(() => {
-      setToast({ "show": false, "drive": platform, "theme": theme })
-    }, second);
   }
 
   const handleSubmit = async e => {
@@ -85,17 +166,77 @@ function Login() {
         .then((res) => {
           localStorage.setItem("status", "sucess")
           localStorage.setItem("id", res.data.id)
+                    
           if (res.data.role == "admin") {
             navigate("/pj-DPUCare/admin")
           } else {
             get_section(res.data.id)
               .then((res) => {
-                localStorage.setItem("section_id", res.data[0].section_id)
-                navigate("/pj-DPUCare")
+                if (res.data[0] != undefined) {                
+                  localStorage.setItem("section_id", res.data[0].section_id)
+                  navigate("/pj-DPUCare")
+                }
+                else {
+                  new_section(localStorage.getItem("id"))
+                    .then((res) => {
+                      localStorage.setItem("section_id", res.data.section_id)
+                      new_message(res.data.section_id, { "question": LANGUAGES.language[language].hi })
+                        .then((_) => {
+                          navigate("/pj-DPUCare")
+                        }).catch((err) => {
+                          console.log(err);
+                          setToast({
+                            "show": true,
+                            "status": "mistake",
+                            "text": LANGUAGES.language[language].warn.error,
+                            "icon": true,
+                            "font": language,
+                            "flag": true,
+                            "duration": 10000,
+                            "drive": platform,
+                            "theme": theme,
+                            "report": {
+                              timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                              issue_type: err.code,
+                              user_id: `${user_id}`,
+                              title: "new_message [POST][Login]",
+                              description: err.message,
+                              severity: "hight",
+                              status: "wait",
+                            }
+                          })
+                          handleTime(10500)
+                          return;
+                        })
+                    }).catch((err) => {
+                      console.log(err);
+                      setToast({
+                        "show": true,
+                        "status": "mistake",
+                        "text": LANGUAGES.language[language].warn.error,
+                        "icon": true,
+                        "font": language,
+                        "flag": true,
+                        "duration": 10000,
+                        "drive": platform,
+                        "theme": theme,
+                        "report": {
+                          timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                          issue_type: err.code,
+                          user_id: `${user_id}`,
+                          title: "new_section [POST][Login]",
+                          description: err.message,
+                          severity: "hight",
+                          status: "wait",
+                        }
+                      })
+                      handleTime(10500)
+                      return;
+                    })
+                }
               })
               .catch((err) => {
                 console.log(err);
-                // Note Error for logout not section id
                 setToast({
                   "show": true,
                   "status": "mistake",
@@ -108,11 +249,11 @@ function Login() {
                   "theme": theme,
                   "report": {
                     timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                    issue_type: "server",
-                    user_id: "non-user",
-                    title: "get_section",
+                    issue_type: err.code,
+                    user_id: "null",
+                    title: "get_section [GET][Login]",
                     description: err.message,
-                    severity: "hight",
+                    severity: "medium",
                     status: "wait",
                   }
                 })
@@ -165,9 +306,9 @@ function Login() {
               "theme": theme,
               "report": {
                 timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                issue_type: "server",
-                user_id: "non-user",
-                title: "login",
+                issue_type: err.code,
+                user_id: "null",
+                title: "login [POST][Login]",
                 description: err.message,
                 severity: "hight",
                 status: "wait",

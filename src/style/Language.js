@@ -54,6 +54,7 @@ const language = {
             "en": "อังกฤษ",
             "resetting": "คืนค่าเริ่มต้น",
             "cancel": "ยกเลิก",
+            "hi": "สวัสดี",
             "not_support": "อุปกรณ์ไม่รองรับ",
             "warn": {
                 "wait": "กรุณารอสักคู่",
@@ -114,6 +115,7 @@ const language = {
             "en": "Eng",
             "resetting": "Restore defaults",
             "cancel": "Cancel",
+            "hi": "Hello",
             "not_support": "The device is not supported.",
             "warn": {
                 "wait": "Please wait a moment",

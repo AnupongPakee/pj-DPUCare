@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-import { register, new_profile, new_section, new_message, test_connect } from "../API"
+import { register, new_profile, new_section, new_message, get_notification, del_notification, test_connect } from "../API"
 import THEMES from "../style/Themes"
 import LANGUAGES from "../style/Language"
 import Toast from './Toast'
@@ -28,11 +28,98 @@ function Register() {
       "report": ""
     })
   const navigate = useNavigate()
+  const currentDate = new Date()
+
+  const user_id = localStorage.getItem("id")
+
+  const handleTime = (second) => {
+    setTimeout(() => {
+      setToast({ "show": false, "drive": platform, "theme": theme })
+    }, second);
+  }
 
   useEffect(() => {
     test_connect()
       .then((_) => {
         console.log("connect: success");
+        get_notification()
+          .then((res) => {
+            if (res.data.length > 0) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {
+                setToast({
+                  "show": true,
+                  "status": "admin",
+                  "text": (language == "en" ? res.data[0].notification_en : res.data[0].notification_th),
+                  "icon": false,
+                  "font": language,
+                  "flag": false,
+                  "duration": 5000,
+                  "drive": platform,
+                  "theme": theme
+                })
+                handleTime(5500)
+                return;
+              } else {
+                del_notification(res.data[0].id)
+                  .then((_) => {
+                    return;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setToast({
+                      "show": true,
+                      "status": "mistake",
+                      "text": LANGUAGES.language[language].warn.error,
+                      "icon": true,
+                      "font": language,
+                      "flag": true,
+                      "duration": 10000,
+                      "drive": platform,
+                      "theme": theme,
+                      "report": {
+                        timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                        issue_type: err.code,
+                        user_id: "null",
+                        title: "del_notification [DELETE][Register]",
+                        description: err.message,
+                        severity: "medium",
+                        status: "wait",
+                      }
+                    })
+                    handleTime(10500)
+                    return;
+                  })
+              }
+            }
+            else {
+              return;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setToast({
+              "show": true,
+              "status": "mistake",
+              "text": LANGUAGES.language[language].warn.error,
+              "icon": true,
+              "font": language,
+              "flag": true,
+              "duration": 10000,
+              "drive": platform,
+              "theme": theme,
+              "report": {
+                timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                issue_type: err.code,
+                user_id: "null",
+                title: "get_notification [GET][Register]",
+                description: err.message,
+                severity: "medium",
+                status: "wait",
+              }
+            })
+            handleTime(10500)
+            return;
+          })
         return;
       }).catch((err) => {
         console.log(err);
@@ -71,12 +158,6 @@ function Register() {
       ...profile,
       [e.target.name]: e.target.value
     })
-  }
-
-  const handleTime = (second) => {
-    setTimeout(() => {
-      setToast({ "show": false, "drive": platform, "theme": theme })
-    }, second);
   }
 
   const handleSubmit = async e => {
@@ -130,7 +211,7 @@ function Register() {
           new_section(res.data.id)
             .then((res) => {
               localStorage.setItem("section_id", res.data.section_id)
-              new_message(res.data.section_id, { "question": "สวัสดี" })
+              new_message(res.data.section_id, { "question": LANGUAGES.language[language].hi })
                 .then((_) => {
                   setStyle(true)
                 }).catch((err) => {
@@ -147,9 +228,9 @@ function Register() {
                     "theme": theme,
                     "report": {
                       timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                      issue_type: "server",
-                      user_id: "non-user",
-                      title: "new_message",
+                      issue_type: err.code,
+                      user_id: `${user_id}`,
+                      title: "new_message [POST][Register]",
                       description: err.message,
                       severity: "hight",
                       status: "wait",
@@ -172,9 +253,9 @@ function Register() {
                 "theme": theme,
                 "report": {
                   timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                  issue_type: "server",
-                  user_id: "non-user",
-                  title: "new_section",
+                  issue_type: err.code,
+                  user_id: `${user_id}`,
+                  title: "new_section [POST][Register]",
                   description: err.message,
                   severity: "hight",
                   status: "wait",
@@ -228,9 +309,9 @@ function Register() {
               "theme": theme,
               "report": {
                 timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
-                issue_type: "server",
-                user_id: "non-user",
-                title: "register",
+                issue_type: err.code,
+                user_id: "null",
+                title: "register [POST][Register]",
                 description: err.message,
                 severity: "hight",
                 status: "wait",
@@ -262,11 +343,11 @@ function Register() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "new_profile",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "new_profile [POST][Register]",
             description: err.message,
-            severity: "hight",
+            severity: "medium",
             status: "wait",
           }
         })
@@ -303,7 +384,7 @@ function Register() {
         </div>
         <img src="images/lgn_rgs.jpg" alt="images" />
       </div>
-      <div className="new-profile" style={style ? THEMES[platform][theme].background : {display: "none"}}>
+      <div className="new-profile" style={style ? THEMES[platform][theme].background : { display: "none" }}>
         <form onSubmit={handleSubmitProfile}>
           <h1 style={LANGUAGES.font[language]} className='header-profile'>{LANGUAGES.language[language].profile}</h1>
           <div className="label-sex">
@@ -328,7 +409,7 @@ function Register() {
             </select>
           </div>
           <div className="btn-2">
-            <button onClick={() => navigate("/pj-DPUCare")}>{LANGUAGES.language[language].skip}</button>
+            <button type="reset" onClick={() => navigate("/pj-DPUCare")}>{LANGUAGES.language[language].skip}</button>
             <button type='submit'>{LANGUAGES.language[language].save}</button>
           </div>
         </form>

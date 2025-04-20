@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom"
 import {
   get_history,
   get_section,
+  get_notification,
   new_section,
   del_section,
+  del_notification,
   new_message,
   test_connect
 } from "../API"
@@ -17,6 +19,7 @@ import Toast from './Toast'
 
 function Chat() {
   const [form, setForm] = useState({})
+  const [timestamp, setTimeStamp] = useState(new Date());
   const [firstMessage, setFirstMessage] = useState({})
   const [message, setMessage] = useState([])
   const [section, setSection] = useState([])
@@ -38,30 +41,117 @@ function Chat() {
     })
   const navigate = useNavigate()
   const messageEndRef = useRef(null);
+  const currentDate = new Date()
 
   const user_id = localStorage.getItem("id")
   const section_id = localStorage.getItem("section_id")
 
+  const handleTime = (second) => {
+    setTimeout(() => {
+      setToast({ "show": false, "drive": platform, "theme": theme })
+    }, second);
+  }
+
   useEffect(() => {
     test_connect()
-    .then((_) => {
-      console.log("connect: success");
-      return;
-    }).catch((err) => {
-      console.log(err);
-      setToast({
-        "show": true,
-        "status": "mistake",
-        "text": LANGUAGES.language[language].warn.error_connect,
-        "icon": true,
-        "font": language,
-        "flag": false,
-        "duration": 3000,
-        "drive": platform,
-        "theme": theme
+      .then((_) => {
+        console.log("connect: success");
+        get_notification()
+          .then((res) => {
+            getHistory()
+            getSection()
+            if (res.data.length > 0) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {
+                setToast({
+                  "show": true,
+                  "status": "admin",
+                  "text": (language == "en" ? res.data[0].notification_en : res.data[0].notification_th),
+                  "icon": false,
+                  "font": language,
+                  "flag": false,
+                  "duration": 5000,
+                  "drive": platform,
+                  "theme": theme
+                })
+                handleTime(5500)
+                return;
+              } else {
+                del_notification(res.data[0].id)
+                  .then((_) => {
+                    return;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setToast({
+                      "show": true,
+                      "status": "mistake",
+                      "text": LANGUAGES.language[language].warn.error,
+                      "icon": true,
+                      "font": language,
+                      "flag": true,
+                      "duration": 10000,
+                      "drive": platform,
+                      "theme": theme,
+                      "report": {
+                        timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                        issue_type: err.code,
+                        user_id: `${user_id}`,
+                        title: "del_notification [DELETE][Chat]",
+                        description: err.message,
+                        severity: "medium",
+                        status: "wait",
+                      }
+                    })
+                    handleTime(10500)
+                    return;
+                  })
+              }
+            }
+            else {
+              return;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setToast({
+              "show": true,
+              "status": "mistake",
+              "text": LANGUAGES.language[language].warn.error,
+              "icon": true,
+              "font": language,
+              "flag": true,
+              "duration": 10000,
+              "drive": platform,
+              "theme": theme,
+              "report": {
+                timestamp: `[${timestamp.toLocaleDateString()}]:[${timestamp.toLocaleTimeString()}]`,
+                issue_type: err.code,
+                user_id: `${user_id}`,
+                title: "get_notification [GET][Chat]",
+                description: err.message,
+                severity: "medium",
+                status: "wait",
+              }
+            })
+            handleTime(10500)
+            return;
+          })
+        return;
+      }).catch((err) => {
+        console.log(err);
+        setToast({
+          "show": true,
+          "status": "mistake",
+          "text": LANGUAGES.language[language].warn.error_connect,
+          "icon": true,
+          "font": language,
+          "flag": false,
+          "duration": 3000,
+          "drive": platform,
+          "theme": theme
+        })
+        return;
       })
-      return;
-    })
     const line = document.getElementById("line")
     const line2 = document.getElementById("line2")
     const line3 = document.getElementById("line3")
@@ -74,8 +164,6 @@ function Chat() {
     line4.className = `line ${theme}`
     resizer.className = `resizer ${theme}`
     non_chathistory.className = `non-history ${theme}`
-    getHistory()
-    getSection()
   }, [])
 
   useEffect(() => {
@@ -113,9 +201,9 @@ function Chat() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "get_history [chat.jsx]",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "get_history [GET][Chat]",
             description: err.message,
             severity: "medium",
             status: "wait",
@@ -157,9 +245,9 @@ function Chat() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "get_section [chat.jsx]",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "get_section [GET][Chat]",
             description: err.message,
             severity: "medium",
             status: "wait",
@@ -175,7 +263,7 @@ function Chat() {
       .then(async (res) => {
         getSection()
         localStorage.setItem("section_id", res.data.section_id)
-        new_message(res.data.section_id, { "question": "สวัสดี" })
+        new_message(res.data.section_id, { "question": LANGUAGES.language[language].hi })
           .then((_) => {
             getHistory()
             location.reload()
@@ -195,9 +283,9 @@ function Chat() {
               "theme": theme,
               "report": {
                 timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-                issue_type: "server",
-                user_id: "non-user",
-                title: "new_message [chat.jsx]",
+                issue_type: err.code,
+                user_id: `${user_id}`,
+                title: "new_message [POST][Chat]",
                 description: err.message,
                 severity: "hight",
                 status: "wait",
@@ -221,9 +309,9 @@ function Chat() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "new_section [chat.jsx]",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "new_section [POST][Chat]",
             description: err.message,
             severity: "hight",
             status: "wait",
@@ -257,11 +345,11 @@ function Chat() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "del_section [chat.jsx]",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "del_section [DELETE][Chat]",
             description: err.message,
-            severity: "hight",
+            severity: "medium",
             status: "wait",
           }
         })
@@ -304,9 +392,9 @@ function Chat() {
           "theme": theme,
           "report": {
             timestamp: `[${time.toLocaleDateString()}]:[${time.toLocaleTimeString()}]`,
-            issue_type: "server",
-            user_id: "non-user",
-            title: "main new_message [chat.jsx]",
+            issue_type: err.code,
+            user_id: `${user_id}`,
+            title: "new_message [POST][Chat]",
             description: err.message,
             severity: "hight",
             status: "wait",
