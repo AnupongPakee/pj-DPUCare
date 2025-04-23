@@ -1215,11 +1215,115 @@
 }
 
 .admin .chat-admin {
+  position: relative;
   grid-column: 3;
   grid-row: 1 / span 4;
   background-color: rgba(60, 16, 83, 0.25);
   border-radius: 1rem;
+  padding: 1rem;
+}
+
+.admin .chat-admin .mini-icon {
+  display: block;
+  position: absolute;
+  text-align: center;
+  top: 1rem;
+  right: 1rem;
+  color: #E0EAFC;
+}
+
+.admin .chat-admin .icon-theme {
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.admin .chat-admin .icon-theme:hover {
+  scale: 1.4;
+}
+
+.admin .chat-admin .icon-del-chat {
+  cursor: pointer;
+  padding-right: 1rem;
+  transition: all 0.6s ease-in-out;
+}
+
+.admin .chat-admin .icon-del-chat:hover {
+  scale: 1.4;
+}
+
+.admin .chat-admin .show-message {
+  width: 100%;
+  height: 90%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.admin .chat-admin .show-message::-webkit-scrollbar {
+  display: none;
+}
+
+.admin .chat-admin .show-message p {
+  display: inline-block;
+  max-width: 60%;
+  font-size: 1rem;
+  padding: 0.6rem;
+  border: 2px solid #E0EAFC;
+  color: #E0EAFC;
+  margin-bottom: 1rem;
+}
+
+.admin .chat-admin .show-message .human {
+  text-align: end;
+}
+
+.admin .chat-admin .show-message .ai-message {
+  max-width: 80%;
+  border-radius: 0 1rem 1rem 1rem;
+}
+
+.admin .chat-admin .show-message .human-message {
+  border-radius: 1rem 0 1rem 1rem;
+  background-color: rgba(0, 0, 0, 0.25);
   overflow: hidden;
+}
+
+.admin .chat-admin form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  border: 2px solid #E0EAFC;
+  border-radius: 2rem;
+}
+
+.admin .chat-admin form button {
+  background: none;
+  border: none;
+}
+
+.admin .chat-admin form .icon-send {
+  padding-right: 1rem;
+  color: #E0EAFC;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+.admin .chat-admin form .icon-send:hover {
+  scale: 1.3;
+}
+
+.admin .chat-admin form input {
+  width: 100%;
+  height: 100%;
+  padding: 0.2rem 0.2rem 0.2rem 1rem;
+  background: none;
+  border: none;
+  outline: none;
+  color: #E0EAFC;
+}
+
+.admin .chat-admin form input::placeholder {
+  color: #E0EAFC;
 }
 
 .admin .exit {
@@ -1298,6 +1402,7 @@
   padding: 1.6rem;
   color: #E0EAFC;
   backdrop-filter: blur(1rem);
+  z-index: 1;
 }
 
 .admin .full-prompt-template form {
@@ -1401,6 +1506,120 @@
   scale: 1.2;
 }
 
+.admin .full-report .block-group {
+  position: relative;
+  padding: 1rem;
+  width: 90%;
+  max-height: 80%;
+  border: 2px solid #E0EAFC;
+}
+
+.admin .full-report .header-block {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 8%;
+  border-bottom: 2px solid #E0EAFC;
+}
+
+.admin .full-report .list-block {
+  width: 100%;
+  height: 92%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.admin .full-report .list-block h3 {
+  padding: 1rem 0;
+}
+
+.admin .full-report .report-detail {
+  display: flex;
+  width: 100%;
+}
+
+.admin .full-report .report-detail .view {
+  text-align: center;
+  height: 90%;
+  margin: 1rem 0;
+  border: 2px solid #E0EAFC;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.admin .full-report .report-detail .view:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.admin .full-report .icon {
+  position: absolute;
+  top: -1.6rem;
+  right: 0;
+}
+
+.admin .view-one-report {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1.6rem;
+  color: #E0EAFC;
+  backdrop-filter: blur(1rem);
+}
+
+.admin .view-one-report .detail {
+  position: relative;
+  width: 90%;
+  padding: 1rem;
+  border: 2px solid #E0EAFC;
+}
+
+.admin .view-one-report .detail h1 {
+  margin-bottom: 0.8rem;
+}
+
+.admin .view-one-report .icon {
+  position: absolute;
+  top: -1.6rem;
+  right: 0;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.admin .view-one-report .icon:nth-child(1) {
+  right: 2rem;
+}
+
+.admin .view-one-report .icon:hover {
+  scale: 1.2;
+}
+
+.admin .reload-list-report {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1.6rem;
+  color: #E0EAFC;
+  backdrop-filter: blur(1rem);
+}
+
+.admin .no-report {
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.admin .no-report:hover {
+  scale: 1.2;
+}
+
 .admin .notification {
   padding: 1rem;
   color: #E0EAFC;
@@ -1437,6 +1656,7 @@
   width: 100%;
   height: 90%;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .admin .notification input {

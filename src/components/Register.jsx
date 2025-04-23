@@ -45,7 +45,7 @@ function Register() {
         get_notification()
           .then((res) => {
             if (res.data.length > 0) {
-              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` != res.data[0].timestamp) {
                 setToast({
                   "show": true,
                   "status": "admin",
@@ -82,8 +82,7 @@ function Register() {
                         user_id: "null",
                         title: "del_notification [DELETE][Register]",
                         description: err.message,
-                        severity: "medium",
-                        status: "wait",
+                        severity: "medium"
                       }
                     })
                     handleTime(10500)
@@ -113,8 +112,7 @@ function Register() {
                 user_id: "null",
                 title: "get_notification [GET][Register]",
                 description: err.message,
-                severity: "medium",
-                status: "wait",
+                severity: "medium"
               }
             })
             handleTime(10500)
@@ -232,8 +230,7 @@ function Register() {
                       user_id: `${user_id}`,
                       title: "new_message [POST][Register]",
                       description: err.message,
-                      severity: "hight",
-                      status: "wait",
+                      severity: "hight"
                     }
                   })
                   handleTime(10500)
@@ -257,8 +254,7 @@ function Register() {
                   user_id: `${user_id}`,
                   title: "new_section [POST][Register]",
                   description: err.message,
-                  severity: "hight",
-                  status: "wait",
+                  severity: "hight"
                 }
               })
               handleTime(10500)
@@ -313,8 +309,7 @@ function Register() {
                 user_id: "null",
                 title: "register [POST][Register]",
                 description: err.message,
-                severity: "hight",
-                status: "wait",
+                severity: "hight"
               }
             })
             handleTime(10500)
@@ -347,8 +342,7 @@ function Register() {
             user_id: `${user_id}`,
             title: "new_profile [POST][Register]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium"
           }
         })
         handleTime(10500)

@@ -45,7 +45,7 @@ function Login() {
         get_notification()
           .then((res) => {
             if (res.data.length > 0) {
-              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` != res.data[0].timestamp) {
                 setToast({
                   "show": true,
                   "status": "admin",
@@ -82,8 +82,7 @@ function Login() {
                         user_id: "null",
                         title: "del_notification [DELETE][Login]",
                         description: err.message,
-                        severity: "medium",
-                        status: "wait",
+                        severity: "medium"
                       }
                     })
                     handleTime(10500)
@@ -113,8 +112,7 @@ function Login() {
                 user_id: "null",
                 title: "get_notification [GET][Login]",
                 description: err.message,
-                severity: "medium",
-                status: "wait",
+                severity: "medium"
               }
             })
             handleTime(10500)
@@ -201,8 +199,7 @@ function Login() {
                               user_id: `${user_id}`,
                               title: "new_message [POST][Login]",
                               description: err.message,
-                              severity: "hight",
-                              status: "wait",
+                              severity: "hight"
                             }
                           })
                           handleTime(10500)
@@ -226,8 +223,7 @@ function Login() {
                           user_id: `${user_id}`,
                           title: "new_section [POST][Login]",
                           description: err.message,
-                          severity: "hight",
-                          status: "wait",
+                          severity: "hight"
                         }
                       })
                       handleTime(10500)
@@ -253,8 +249,7 @@ function Login() {
                     user_id: "null",
                     title: "get_section [GET][Login]",
                     description: err.message,
-                    severity: "medium",
-                    status: "wait",
+                    severity: "medium"
                   }
                 })
                 handleTime(10500)
@@ -310,8 +305,7 @@ function Login() {
                 user_id: "null",
                 title: "login [POST][Login]",
                 description: err.message,
-                severity: "hight",
-                status: "wait",
+                severity: "hight"
               }
             })
             handleTime(10500)

@@ -61,7 +61,7 @@ function Chat() {
             getHistory()
             getSection()
             if (res.data.length > 0) {
-              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` != res.data[0].timestamp) {
                 setToast({
                   "show": true,
                   "status": "admin",
@@ -98,8 +98,7 @@ function Chat() {
                         user_id: `${user_id}`,
                         title: "del_notification [DELETE][Chat]",
                         description: err.message,
-                        severity: "medium",
-                        status: "wait",
+                        severity: "medium"
                       }
                     })
                     handleTime(10500)
@@ -129,8 +128,7 @@ function Chat() {
                 user_id: `${user_id}`,
                 title: "get_notification [GET][Chat]",
                 description: err.message,
-                severity: "medium",
-                status: "wait",
+                severity: "medium"
               }
             })
             handleTime(10500)
@@ -205,8 +203,7 @@ function Chat() {
             user_id: `${user_id}`,
             title: "get_history [GET][Chat]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium" 
           }
         })
         handleTime(10500)
@@ -249,8 +246,7 @@ function Chat() {
             user_id: `${user_id}`,
             title: "get_section [GET][Chat]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium"
           }
         })
         handleTime(10500)
@@ -287,8 +283,7 @@ function Chat() {
                 user_id: `${user_id}`,
                 title: "new_message [POST][Chat]",
                 description: err.message,
-                severity: "hight",
-                status: "wait",
+                severity: "hight"
               }
             })
             handleTime(10500)
@@ -313,8 +308,7 @@ function Chat() {
             user_id: `${user_id}`,
             title: "new_section [POST][Chat]",
             description: err.message,
-            severity: "hight",
-            status: "wait",
+            severity: "hight"
           }
         })
         handleTime(10500)
@@ -349,8 +343,7 @@ function Chat() {
             user_id: `${user_id}`,
             title: "del_section [DELETE][Chat]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium"
           }
         })
         handleTime(10500)
@@ -396,8 +389,7 @@ function Chat() {
             user_id: `${user_id}`,
             title: "new_message [POST][Chat]",
             description: err.message,
-            severity: "hight",
-            status: "wait",
+            severity: "hight"
           }
         })
         handleTime(10500)
@@ -484,17 +476,17 @@ function Chat() {
           </div>
           <div className="show-message">
             <div className="st-message">
-              <p className='ai-message'>{firstMessage.answer}</p>
+              <p className='ai-message' style={LANGUAGES.font[language]}>{firstMessage.answer}</p>
             </div>
             {
               message.map((item, idx) => {
                 return (
                   <div className="message" key={idx}>
                     <div className="h-message">
-                      <p className='human-message'>{item.question}</p>
+                      <p className='human-message' style={LANGUAGES.font[language]}>{item.question}</p>
                     </div>
                     <div className="a-message">
-                      <p className='ai-message'>{item.answer}</p>
+                      <p className='ai-message' style={LANGUAGES.font[language]}>{item.answer}</p>
                     </div>
                   </div>
                 )

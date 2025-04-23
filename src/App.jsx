@@ -72,9 +72,9 @@ function App() {
           return;
         }
         get_notification()
-          .then((res) => {
+          .then((res) => {            
             if (res.data.length > 0) {
-              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` == res.data[0].timestamp) {                
+              if (`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}` != res.data[0].timestamp) {                
                 setToast({
                   "show": true,
                   "status": "admin",
@@ -111,8 +111,7 @@ function App() {
                         user_id: `${user_id}`,
                         title: "del_notification [DELETE][App]",
                         description: err.message,
-                        severity: "medium",
-                        status: "wait",
+                        severity: "medium"
                       }
                     })
                     handleTime(10500)
@@ -142,8 +141,7 @@ function App() {
                 user_id: `${user_id}`,
                 title: "get_notification [GET][App]",
                 description: err.message,
-                severity: "medium",
-                status: "wait",
+                severity: "medium" 
               }
             })
             handleTime(10500)
@@ -239,8 +237,7 @@ function App() {
             user_id: `${user_id}`,
             title: "get_history [GET][App]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium"
           }
         })
         handleTime(10500)
@@ -271,8 +268,7 @@ function App() {
             user_id: `${user_id}`,
             title: "get_profile [GET][App]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium"
           }
         })
         handleTime(10500)
@@ -312,8 +308,7 @@ function App() {
             user_id: `${user_id}`,
             title: "get_section [GET][App]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium" 
           }
         })
         handleTime(10500)
@@ -358,8 +353,7 @@ function App() {
                     user_id: `${user_id}`,
                     title: "new_message [POST][App]",
                     description: err.message,
-                    severity: "higth",
-                    status: "wait",
+                    severity: "higth"
                   }
                 })
                 handleTime(10500)
@@ -384,8 +378,7 @@ function App() {
                 user_id: `${user_id}`,
                 title: "new_section [POST][App]",
                 description: err.message,
-                severity: "higth",
-                status: "wait",
+                severity: "higth"
               }
             })
             handleTime(10500)
@@ -416,8 +409,7 @@ function App() {
               user_id: `${user_id}`,
               title: "new_message [POST][App]",
               description: err.message,
-              severity: "hight",
-              status: "wait",
+              severity: "hight"
             }
           })
           handleTime(10500)
@@ -461,8 +453,7 @@ function App() {
                 user_id: `${user_id}`,
                 title: "test_chatbot [POST][App]",
                 description: err.message,
-                severity: "hight",
-                status: "wait",
+                severity: "hight"
               }
             })
             handleTime(10500)
@@ -496,8 +487,7 @@ function App() {
             user_id: `${user_id}`,
             title: "new_profile [POST][App]",
             description: err.message,
-            severity: "medium",
-            status: "wait",
+            severity: "medium"
           }
         })
         handleTime(10500)

@@ -44,6 +44,13 @@ export const get_report = async () => {
     return await axios.get(import.meta.env.VITE_API + "/report")
 }
 
+export const get_one_report = async (id) => {
+    return await axios.get(import.meta.env.VITE_API + "/report/" + id)
+}
+
+export const del_report = async (id) =>
+    await axios.delete(import.meta.env.VITE_API + "/report/" + id)
+
 export const create_notification = async (data) => {
     await axios.post(import.meta.env.VITE_API + "/notifications", data)
 }
